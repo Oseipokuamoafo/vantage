@@ -1,5 +1,9 @@
 # Vantage
 
+[![CI](https://github.com/Oseipokuamoafo/vantage/actions/workflows/ci.yml/badge.svg)](https://github.com/Oseipokuamoafo/vantage/actions/workflows/ci.yml)
+[![Deploy](https://github.com/Oseipokuamoafo/vantage/actions/workflows/deploy.yml/badge.svg)](https://github.com/Oseipokuamoafo/vantage/actions/workflows/deploy.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-0d6b63.svg)](LICENSE)
+
 **Decision support for students comparing career-building opportunities.**
 
 Vantage puts certifications, side projects, student orgs, internships and research programs (REUs) side by side.
@@ -10,17 +14,21 @@ the decision to the student.
 > **Prototype.** Accounts are stored in your browser only. All opportunity and outcome data is sample data, not
 > real statistics. See [Prototype limitations](#prototype-limitations).
 
-**Live demo:** https://YOUR-GITHUB-USERNAME.github.io/vantage/ _(placeholder: update after the first deploy)_
+**Live demo:** https://oseipokuamoafo.github.io/vantage/ · **Repository:** https://github.com/Oseipokuamoafo/vantage
 
 | Landing                                       | Compare                                          | Plan                                           |
 | --------------------------------------------- | ------------------------------------------------ | ---------------------------------------------- |
 | ![Landing page](docs/screenshots/landing.png) | ![Comparison view](docs/screenshots/compare.png) | ![Semester planner](docs/screenshots/plan.png) |
 
-_Screenshot placeholders: add images to `docs/screenshots/`._
+_Screenshots show the Devon demo persona. All figures are prototype sample data._
 
 ## Quick start
 
+Requires Node.js 20 or newer.
+
 ```bash
+git clone https://github.com/Oseipokuamoafo/vantage.git
+cd vantage
 npm install && npm run dev
 ```
 
@@ -98,16 +106,12 @@ docs/                     ARCHITECTURE.md, TRACEABILITY.md
 
 ## Deploy to GitHub Pages
 
-1. Create a GitHub repository (for example `vantage`) and push:
-   ```bash
-   git remote add origin https://github.com/<you>/vantage.git
-   git push -u origin main
-   ```
+1. Push to `main` on GitHub (this repository: `https://github.com/Oseipokuamoafo/vantage.git`).
 2. On GitHub, open **Settings → Pages**.
 3. Under **Build and deployment**, set **Source** to **GitHub Actions**.
 4. The **Deploy to GitHub Pages** workflow runs on every push to `main`. You can also start it from the
    **Actions** tab ("Run workflow").
-5. The site is published at `https://<you>.github.io/<repo-name>/`. Update the live-demo link above.
+5. The site is published at https://oseipokuamoafo.github.io/vantage/ (for a fork: `https://<you>.github.io/<repo-name>/`).
 
 The workflow sets `VITE_BASE=/<repo-name>/` automatically, so no configuration is needed, and HashRouter means
 GitHub Pages needs no server rewrites. To build for another sub-path locally, run `VITE_BASE=/my-path/ npm run build`.

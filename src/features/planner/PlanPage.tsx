@@ -82,12 +82,12 @@ function PlanItem({ opp, containers, current, onMove }: ItemProps) {
             {TYPE_LABELS[opp.type]} · {opp.timeCommitmentHoursPerWeek} hrs/week ·{' '}
             {opp.durationWeeks} wk
           </p>
-          <label className="mt-1 flex items-center gap-2 text-xs">
-            <span className="text-ink-soft">Move to</span>
+          <label className="mt-1 flex min-w-0 items-center gap-2 text-xs">
+            <span className="shrink-0 whitespace-nowrap text-ink-soft">Move to</span>
             <select
               value={current}
               onChange={(e) => onMove(e.target.value)}
-              className="min-h-[36px] rounded-md border border-line-strong bg-paper-raised px-2 text-xs"
+              className="min-h-[36px] w-full min-w-0 rounded-md border border-line-strong bg-paper-raised px-2 text-xs"
               aria-label={`Move ${opp.title} to`}
             >
               {containers.map((c) => (
