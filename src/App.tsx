@@ -2,9 +2,9 @@ import { lazy } from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { AppShell } from './components/layout/AppShell';
 import { RequireAdmin, RequireAuth } from './components/layout/guards';
-import { LandingPage } from './features/shell';
 
-// Route-level code splitting keeps the initial bundle small.
+// Route-level code splitting keeps the initial bundle small; the landing page is its own chunk.
+const LandingPage = lazy(() => import('./features/shell/LandingPage'));
 const SignUpPage = lazy(() => import('./features/profile/SignUpPage'));
 const LoginPage = lazy(() => import('./features/profile/LoginPage'));
 const ResetPasswordPage = lazy(() => import('./features/profile/ResetPasswordPage'));
