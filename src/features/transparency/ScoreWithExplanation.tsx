@@ -17,31 +17,35 @@ export function ScoreWithExplanation({
   showLabel?: boolean;
 }) {
   return (
-    <div className="space-y-1.5" data-testid={`score-${attribute.key}`}>
-      {showLabel && <p className="text-sm font-semibold text-ink">{attribute.label}</p>}
+    <div className="space-y-2.5" data-testid={`score-${attribute.key}`}>
+      {showLabel && <p className="text-sm font-bold text-navy">{attribute.label}</p>}
       <ScoreMeter value={attribute.score} label={attribute.label} />
-      <p className="text-sm leading-snug text-ink-soft">
-        <span className="font-medium text-ink">Driven by:</span> {attribute.summary}
-      </p>
-      <div className="flex flex-wrap items-center gap-2">
-        <DataQualityBadge quality={quality} />
-        <span className="text-xs text-ink-muted">Weight {Math.round(attribute.weight * 100)}%</span>
+      <div className="space-y-2 rounded-2xl bg-tint p-3">
+        <p className="text-sm leading-snug text-body">
+          <span className="font-semibold text-navy">Driven by:</span> {attribute.summary}
+        </p>
+        <div className="flex flex-wrap items-center gap-2">
+          <DataQualityBadge quality={quality} />
+          <span className="text-xs font-medium text-muted">
+            Weight {Math.round(attribute.weight * 100)}%
+          </span>
+        </div>
+        <details className="disclosure text-sm">
+          <summary className="font-semibold text-primary underline-offset-4 hover:underline">
+            Why this rating<span className="sr-only"> for {attribute.label}</span>
+          </summary>
+          <ul className="mt-2 list-disc space-y-1 pl-5 text-body">
+            {attribute.drivers.map((d) => (
+              <li key={d}>{d}</li>
+            ))}
+            <li>{ATTRIBUTE_SCALE_NOTES[attribute.key]}</li>
+            <li>
+              Contributes {attribute.contribution.toFixed(1)} to the weighted summary (
+              {attribute.score.toFixed(1)} × {Math.round(attribute.weight * 100)}%).
+            </li>
+          </ul>
+        </details>
       </div>
-      <details className="disclosure text-sm">
-        <summary className="font-semibold text-accent-strong underline-offset-4 hover:underline">
-          Why this rating<span className="sr-only"> for {attribute.label}</span>
-        </summary>
-        <ul className="mt-2 list-disc space-y-1 pl-5 text-ink-soft">
-          {attribute.drivers.map((d) => (
-            <li key={d}>{d}</li>
-          ))}
-          <li>{ATTRIBUTE_SCALE_NOTES[attribute.key]}</li>
-          <li>
-            Contributes {attribute.contribution.toFixed(1)} to the weighted summary (
-            {attribute.score.toFixed(1)} × {Math.round(attribute.weight * 100)}%).
-          </li>
-        </ul>
-      </details>
     </div>
   );
 }

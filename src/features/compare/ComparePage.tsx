@@ -13,7 +13,7 @@ import { useOpportunities } from '../../data/content';
 import { getPlan } from '../../data/plans';
 import { MAX_COMPARE, MIN_COMPARE, toggleCompare, updateWorkspace } from '../../data/workspace';
 import { useStudent } from '../../hooks/useStudent';
-import { formatCost, TYPE_COLORS, TYPE_LABELS, TypeMark } from '../catalog';
+import { formatCost, TYPE_LABELS, TypeMark } from '../catalog';
 import { OutcomesPanel } from '../outcomes';
 import { ChangesSinceSaved, SavePlanForm } from '../saved';
 import { ATTRIBUTE_LABELS, ATTRIBUTE_ORDER, scoreAll } from '../scoring';
@@ -70,27 +70,100 @@ export default function ComparePage() {
     setPick('');
   }
 
-  const cell = 'border-b border-line p-3 align-top transition-colors group-hover:bg-paper sm:p-4';
-  const rowHeader = `${cell} sticky left-0 z-10 w-28 min-w-[7rem] bg-paper-sunk text-left text-sm font-bold transition-colors group-hover:bg-marker-soft sm:w-40`;
+  // Each opportunity column renders as one white rounded card: cells share a white surface,
+  // the first row rounds the top corners and the last row rounds the bottom ones.
+  const colCell = (row: 'first' | 'middle' | 'last') =>
+    `min-w-[78vw] snap-start bg-surface px-5 align-top sm:min-w-[17rem] ${
+      row === 'first' ? 'rounded-t-card pt-6' : row === 'last' ? 'rounded-b-card pb-6' : ''
+    } ${row !== 'first' ? 'border-t border-border py-5' : 'pb-5'}`;
+  const rowHeader =
+    'sticky left-0 z-10 w-28 min-w-[7rem] bg-page py-5 pr-3 text-left align-top text-sm font-bold text-navy sm:w-40';
+  const rows: { key: string; label: string; render: (i: number) => JSX.Element }[] = [
+    ...ATTRIBUTE_ORDER.map((k) => ({
+      key: k,
+      label: ATTRIBUTE_LABELS[k],
+      render: (i: number) => (
+        <ScoreWithExplanation
+          attribute={results[selected[i]!.id]!.attributes[k]}
+          quality={selected[i]!.dataQuality}
+          showLabel={false}
+        />
+      ),
+    })),
+    {
+      key: 'summary',
+      label: 'Weighted summary',
+      render: (i) => (
+        <SummaryWithExplanation result={results[selected[i]!.id]!} goalName={goal.name} />
+      ),
+    },
+    {
+      key: 'fit',
+      label: 'Constraint fit',
+      render: (i) => <FitPanel result={results[selected[i]!.id]!} />,
+    },
+    {
+      key: 'outcomes',
+      label: 'Reported outcomes',
+      render: (i) => <OutcomesPanel opportunityId={selected[i]!.id} goalTypeId={goal.id} />,
+    },
+    {
+      key: 'time-cost',
+      label: 'Time and cost',
+      render: (i) => {
+        const o = selected[i]!;
+        return (
+          <p className="text-sm text-body">
+            {o.timeCommitmentHoursPerWeek} h/week for {o.durationWeeks} weeks,{' '}
+            {formatCost(o.costUSD)}
+          </p>
+        );
+      },
+    },
+    {
+      key: 'timing',
+      label: 'Timing windows',
+      render: (i) => {
+        const o = selected[i]!;
+        return o.timingWindows.length ? (
+          <div className="space-y-1 text-sm text-body">
+            {o.timingWindows.map((w) => (
+              <p key={`${w.label}-${w.season}`}>
+                <span className="font-semibold text-navy">{w.label}</span> ({w.season}): {w.note}
+              </p>
+            ))}
+          </div>
+        ) : (
+          <p className="text-sm text-body">No fixed window</p>
+        );
+      },
+    },
+    {
+      key: 'source',
+      label: 'Source',
+      render: (i) => <p className="text-sm text-muted">{selected[i]!.source}</p>,
+    },
+  ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <PageHeader
         title="Side-by-side comparison"
         description={
           <>
-            Same measures, same order, for 2–4 options under the <strong>{goal.name}</strong> goal.
-            Columns appear in the order you added them. Nothing is ranked or highlighted.
+            Same measures, same order, for 2–4 options under the{' '}
+            <strong className="text-navy">{goal.name}</strong> goal. Columns appear in the order you
+            added them. Nothing is ranked or highlighted.
           </>
         }
       />
 
       {activePlan && <ChangesSinceSaved plan={activePlan} />}
 
-      <Card className="space-y-3">
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-end">
-          <div className="flex-1 space-y-1">
-            <label htmlFor="compare-pick" className="block text-sm font-medium">
+      <Card className="space-y-4">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
+          <div className="flex-1 space-y-2">
+            <label htmlFor="compare-pick" className="block text-sm font-semibold text-navy">
               Add an opportunity ({selected.length} of {MAX_COMPARE})
             </label>
             <select
@@ -122,7 +195,7 @@ export default function ComparePage() {
         </div>
         {!constraints && (
           <Notice tone="caution">
-            <Link to="/constraints" className="font-medium underline">
+            <Link to="/constraints" className="font-semibold text-primary underline">
               Add your constraints
             </Link>{' '}
             to see hours, budget and timeline fit.
@@ -144,35 +217,30 @@ export default function ComparePage() {
         </EmptyState>
       ) : (
         <>
-          <p className="text-sm text-ink-muted sm:hidden">Swipe sideways to see every column.</p>
+          <p className="text-sm text-muted sm:hidden">Swipe sideways to see every column.</p>
           <div
             role="region"
             aria-label="Comparison table, scrolls horizontally"
             tabIndex={0}
-            className="relative snap-x snap-mandatory scroll-pl-28 overflow-x-auto rounded-xl sm:scroll-pl-40 border border-line bg-paper-raised"
+            className="relative -mx-4 snap-x snap-mandatory scroll-pl-32 overflow-x-auto px-4 pb-4 sm:mx-0 sm:scroll-pl-44 sm:px-0"
           >
-            <table className="w-full border-collapse text-left">
+            <table className="w-full border-separate border-spacing-x-3 border-spacing-y-0 text-left [filter:drop-shadow(0_8px_24px_rgba(15,31,75,0.06))]">
               <caption className="sr-only">
                 Comparison of {selected.length} opportunities for {goal.name}, in the order added
               </caption>
               <thead>
                 <tr>
-                  <th scope="col" className={`${rowHeader} align-bottom group-hover:bg-paper-sunk`}>
+                  <th scope="col" className={`${rowHeader} align-bottom pb-5 pt-6`}>
                     Attribute
                   </th>
                   {selected.map((o) => (
-                    <th
-                      key={o.id}
-                      scope="col"
-                      className={`${cell} min-w-[72vw] snap-start border-t-4 bg-paper-raised font-normal sm:min-w-[16rem]`}
-                      style={{ borderTopColor: TYPE_COLORS[o.type] }}
-                    >
-                      <div className="space-y-2">
-                        <p className="flex items-center gap-1.5 text-sm font-semibold text-ink-soft">
-                          <TypeMark type={o.type} />
+                    <th key={o.id} scope="col" className={`${colCell('first')} font-normal`}>
+                      <div className="space-y-3">
+                        <span className="inline-flex items-center gap-1.5 rounded-full border-[1.5px] border-primary px-3 py-0.5 text-xs font-semibold text-navy">
+                          <TypeMark type={o.type} size={12} />
                           {TYPE_LABELS[o.type]}
-                        </p>
-                        <p className="text-lg font-extrabold leading-snug">{o.title}</p>
+                        </span>
+                        <p className="text-lg font-extrabold leading-snug text-navy">{o.title}</p>
                         <Button
                           size="sm"
                           variant="ghost"
@@ -186,97 +254,28 @@ export default function ComparePage() {
                 </tr>
               </thead>
               <tbody>
-                {ATTRIBUTE_ORDER.map((k) => (
-                  <tr key={k} className="group">
-                    <th scope="row" className={rowHeader}>
-                      {ATTRIBUTE_LABELS[k]}
+                {rows.map((row, r) => (
+                  <tr key={row.key}>
+                    <th
+                      scope="row"
+                      className={`${rowHeader} ${r === 0 ? '' : 'border-t border-border'}`}
+                    >
+                      {row.label}
                     </th>
-                    {selected.map((o) => (
-                      <td key={o.id} className={cell}>
-                        <ScoreWithExplanation
-                          attribute={results[o.id]!.attributes[k]}
-                          quality={o.dataQuality}
-                          showLabel={false}
-                        />
+                    {selected.map((o, i) => (
+                      <td key={o.id} className={colCell(r === rows.length - 1 ? 'last' : 'middle')}>
+                        {row.render(i)}
                       </td>
                     ))}
                   </tr>
                 ))}
-                <tr className="group">
-                  <th scope="row" className={rowHeader}>
-                    Weighted summary
-                  </th>
-                  {selected.map((o) => (
-                    <td key={o.id} className={cell}>
-                      <SummaryWithExplanation result={results[o.id]!} goalName={goal.name} />
-                    </td>
-                  ))}
-                </tr>
-                <tr className="group">
-                  <th scope="row" className={rowHeader}>
-                    Constraint fit
-                  </th>
-                  {selected.map((o) => (
-                    <td key={o.id} className={cell}>
-                      <FitPanel result={results[o.id]!} />
-                    </td>
-                  ))}
-                </tr>
-                <tr className="group">
-                  <th scope="row" className={rowHeader}>
-                    Reported outcomes
-                  </th>
-                  {selected.map((o) => (
-                    <td key={o.id} className={cell}>
-                      <OutcomesPanel opportunityId={o.id} goalTypeId={goal.id} />
-                    </td>
-                  ))}
-                </tr>
-                <tr className="group">
-                  <th scope="row" className={rowHeader}>
-                    Time and cost
-                  </th>
-                  {selected.map((o) => (
-                    <td key={o.id} className={`${cell} text-sm text-ink-soft`}>
-                      {o.timeCommitmentHoursPerWeek} hrs/week for {o.durationWeeks} weeks ·{' '}
-                      {formatCost(o.costUSD)}
-                    </td>
-                  ))}
-                </tr>
-                <tr className="group">
-                  <th scope="row" className={rowHeader}>
-                    Timing windows
-                  </th>
-                  {selected.map((o) => (
-                    <td key={o.id} className={`${cell} text-sm text-ink-soft`}>
-                      {o.timingWindows.length
-                        ? o.timingWindows.map((w) => (
-                            <p key={`${w.label}-${w.season}`}>
-                              <span className="font-medium text-ink">{w.label}</span> ({w.season}):{' '}
-                              {w.note}
-                            </p>
-                          ))
-                        : 'No fixed window'}
-                    </td>
-                  ))}
-                </tr>
-                <tr className="group">
-                  <th scope="row" className={`${rowHeader} border-b-0`}>
-                    Source
-                  </th>
-                  {selected.map((o) => (
-                    <td key={o.id} className={`${cell} border-b-0 text-sm text-ink-muted`}>
-                      {o.source}
-                    </td>
-                  ))}
-                </tr>
               </tbody>
             </table>
           </div>
           <DataQualityLegend />
-          <Card className="space-y-2">
+          <Card className="space-y-3">
             <h2 className="text-xl font-extrabold">Save this comparison</h2>
-            <p className="text-sm text-ink-soft">
+            <p className="text-sm text-body">
               Saves your goal, constraints, these {selected.length} opportunities and your semester
               plan, so you can reopen them later.
             </p>

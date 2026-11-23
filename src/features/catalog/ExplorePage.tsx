@@ -1,6 +1,15 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Card, Notice, PageHeader, buttonClass, inputClass } from '../../components/ui';
+import {
+  Button,
+  Card,
+  Notice,
+  PageHeader,
+  buttonClass,
+  inputClass,
+  chipClass,
+  CheckIcon,
+} from '../../components/ui';
 import { useOpportunities } from '../../data/content';
 import { updateProfile } from '../../data/profiles';
 import { OPPORTUNITY_TYPES, type OpportunityType } from '../../data/types';
@@ -112,13 +121,9 @@ export default function ExplorePage() {
                     type="button"
                     aria-pressed={filters.types.includes(t)}
                     onClick={() => toggleType(t)}
-                    className={`inline-flex min-h-[40px] items-center gap-1.5 rounded-lg border px-2.5 text-sm font-medium transition ${
-                      filters.types.includes(t)
-                        ? 'border-ink bg-ink text-white'
-                        : 'border-line-strong bg-paper-raised text-ink-soft hover:border-ink hover:text-ink'
-                    }`}
+                    className={chipClass(filters.types.includes(t))}
                   >
-                    <TypeMark type={t} />
+                    {filters.types.includes(t) ? <CheckIcon /> : <TypeMark type={t} />}
                     {TYPE_LABELS[t]}
                   </button>
                 ))}
@@ -162,7 +167,7 @@ export default function ExplorePage() {
             </p>
             {goal && (
               <div
-                className="inline-flex rounded-xl border border-line-strong bg-paper-raised p-1"
+                className="inline-flex rounded-full border border-border bg-surface p-1 shadow-soft"
                 role="group"
                 aria-label="View"
               >
@@ -172,10 +177,8 @@ export default function ExplorePage() {
                     type="button"
                     aria-pressed={view === v}
                     onClick={() => setView(v)}
-                    className={`min-h-[36px] rounded-lg px-3 text-sm font-semibold transition ${
-                      view === v
-                        ? 'bg-ink text-white'
-                        : 'text-ink-soft hover:bg-paper-sunk hover:text-ink'
+                    className={`min-h-[40px] rounded-full px-5 text-sm font-semibold transition-colors duration-brand ${
+                      view === v ? 'bg-primary text-white' : 'text-navy hover:bg-tint'
                     }`}
                   >
                     {v === 'list' ? 'List' : 'Map'}

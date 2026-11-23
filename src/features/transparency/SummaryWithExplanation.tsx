@@ -1,16 +1,44 @@
-import { Badge, ScoreMeter } from '../../components/ui';
-import type { BadgeTone } from '../../components/ui';
+import { ScoreMeter } from '../../components/ui';
 import { ATTRIBUTE_LABELS, type FitStatus, type ScoreResult } from '../scoring';
 import { DataQualityBadge } from './DataQualityBadge';
 
-const FIT_LABEL: Record<FitStatus, { text: string; tone: BadgeTone }> = {
-  fits: { text: 'Fits', tone: 'accent' },
-  tight: { text: 'Tight', tone: 'caution' },
-  exceeds: { text: 'Exceeds', tone: 'alert' },
+const FIT_LABEL: Record<FitStatus, { text: string; className: string; icon: string }> = {
+  fits: {
+    text: 'Fits',
+    className: 'border-primary/50 bg-tint text-primary-active',
+    icon: 'M4.8 8.3 7 10.4l4.2-4.6',
+  },
+  tight: {
+    text: 'Tight',
+    className: 'border-amber-line bg-amber-soft text-amber',
+    icon: 'M8 4.6v4.2M8 11.2v.2',
+  },
+  exceeds: {
+    text: 'Exceeds',
+    className: 'border-danger/60 bg-danger-soft text-danger',
+    icon: 'M5.4 5.4l5.2 5.2M10.6 5.4l-5.2 5.2',
+  },
 };
 
 export function FitStatusBadge({ status }: { status: FitStatus }) {
-  return <Badge tone={FIT_LABEL[status].tone}>{FIT_LABEL[status].text}</Badge>;
+  const f = FIT_LABEL[status];
+  return (
+    <span
+      className={`inline-flex items-center gap-1 rounded-full border-[1.5px] px-2 py-0.5 text-xs font-semibold leading-5 ${f.className}`}
+    >
+      <svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true">
+        <path
+          d={f.icon}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+      {f.text}
+    </span>
+  );
 }
 
 /** Weighted summary plus which attribute drove it. Constraint fit is shown separately below it. */
@@ -23,7 +51,7 @@ export function SummaryWithExplanation({
 }) {
   return (
     <div className="space-y-1.5" data-testid="weighted-summary">
-      <p className="text-sm font-semibold text-ink">Weighted summary</p>
+      <p className="text-sm font-bold text-navy">Weighted summary</p>
       <ScoreMeter value={result.weightedSummary} label={`Weighted summary for ${goalName}`} />
       <p className="text-sm text-ink-soft">
         <span className="font-medium text-ink">Driven by:</span>{' '}
@@ -32,8 +60,8 @@ export function SummaryWithExplanation({
       <div className="flex flex-wrap items-center gap-2">
         <DataQualityBadge quality={result.dataQuality} />
       </div>
-      <details className="disclosure text-sm">
-        <summary className="font-semibold text-accent-strong underline-offset-4 hover:underline">
+      <details className="disclosure rounded-2xl bg-tint p-3 text-sm">
+        <summary className="font-semibold text-primary underline-offset-4 hover:underline">
           How this is calculated
         </summary>
         <div className="mt-2 space-y-1 text-ink-soft">
@@ -61,7 +89,7 @@ export function FitPanel({ result }: { result: ScoreResult }) {
   const { fit } = result;
   return (
     <div className="space-y-2" data-testid="constraint-fit">
-      <p className="text-sm font-semibold text-ink">Constraint fit (separate from the rating)</p>
+      <p className="text-sm font-bold text-navy">Constraint fit (separate from the rating)</p>
       <ul className="space-y-1.5">
         {fit.adjustments.map((a) => (
           <li key={a.constraint} className="text-sm">

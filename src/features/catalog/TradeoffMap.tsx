@@ -99,10 +99,10 @@ export function TradeoffMap({
               type="button"
               aria-pressed={on}
               onClick={() => toggleType(t)}
-              className={`inline-flex min-h-[36px] items-center gap-1.5 rounded-lg border px-2.5 text-sm font-medium transition ${
+              className={`inline-flex min-h-[40px] items-center gap-1.5 rounded-full border-[1.5px] px-3.5 text-sm font-semibold transition duration-brand ${
                 on
-                  ? 'border-line-strong bg-paper-raised text-ink hover:border-ink'
-                  : 'border-dashed border-line-strong text-ink-muted line-through opacity-70 hover:opacity-100'
+                  ? 'border-primary bg-surface text-navy hover:bg-tint'
+                  : 'border-dashed border-border-strong bg-surface text-muted line-through hover:text-navy'
               }`}
             >
               <TypeMark type={t} />
@@ -281,7 +281,7 @@ export function TradeoffMap({
 
           {shown && (
             <div
-              className="pointer-events-none absolute z-10 w-64 rounded-xl border border-line bg-paper-raised p-3 text-sm shadow-lift"
+              className="pointer-events-none absolute z-10 w-64 rounded-2xl border border-border bg-surface p-4 text-sm shadow-hover"
               style={{
                 left: `${(shown.x / W) * 100}%`,
                 top: `${(shown.y / H) * 100}%`,
@@ -327,7 +327,7 @@ export function TradeoffMap({
       <details className="disclosure text-sm">
         <summary className="font-semibold text-accent-strong">Show the map as a table</summary>
         <div
-          className="relative mt-2 overflow-x-auto rounded-xl border border-line"
+          className="relative mt-2 overflow-x-auto rounded-2xl border border-border"
           role="region"
           aria-label="Trade-off map data"
           tabIndex={0}
