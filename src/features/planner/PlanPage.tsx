@@ -12,7 +12,15 @@ import {
   type Announcements,
   type DragEndEvent,
 } from '@dnd-kit/core';
-import { Badge, Button, Card, EmptyState, PageHeader, buttonClass } from '../../components/ui';
+import {
+  Badge,
+  Button,
+  Card,
+  EmptyState,
+  PageHeader,
+  buttonClass,
+  inputClass,
+} from '../../components/ui';
 import { useOpportunities } from '../../data/content';
 import { getPlan } from '../../data/plans';
 import type { Opportunity } from '../../data/types';
@@ -35,7 +43,7 @@ const FLAG_STYLE: Record<
   TermFlag['kind'],
   { tone: 'alert' | 'accent' | 'caution' | 'neutral'; label: string }
 > = {
-  overload: { tone: 'alert', label: 'Over hours' },
+  overload: { tone: 'caution', label: 'Over hours' },
   window: { tone: 'accent', label: 'Timing window' },
   off_window: { tone: 'caution', label: 'Outside usual window' },
   reminder: { tone: 'neutral', label: 'Related window' },
@@ -57,16 +65,16 @@ function PlanItem({ opp, containers, current, onMove }: ItemProps) {
     <li
       ref={setNodeRef}
       style={style}
-      className={`rounded-xl border bg-paper-raised p-2 transition-[box-shadow,border-color] duration-150 ${
+      className={`rounded-[22px] border bg-surface p-2 pr-3 shadow-soft transition-[box-shadow,border-color] duration-brand ${
         isDragging
-          ? 'relative z-20 rotate-[1.5deg] scale-[1.02] border-accent shadow-lift ring-2 ring-accent'
-          : 'border-line hover:border-line-strong hover:shadow-lift'
+          ? 'relative z-20 border-primary shadow-hover ring-2 ring-primary'
+          : 'border-border hover:border-primary/50 hover:shadow-hover'
       }`}
     >
       <div className="flex items-start gap-2">
         <button
           type="button"
-          className="flex min-h-[44px] min-w-[44px] shrink-0 cursor-grab touch-none items-center justify-center rounded-lg border border-line text-ink-muted transition-colors hover:border-ink hover:bg-ink hover:text-marker active:cursor-grabbing"
+          className="flex min-h-[44px] min-w-[44px] shrink-0 cursor-grab touch-none items-center justify-center rounded-full border border-border bg-page text-muted transition-colors duration-brand hover:border-primary hover:bg-tint hover:text-primary active:cursor-grabbing"
           aria-label={`Drag ${opp.title}`}
           {...listeners}
           {...attributes}
@@ -81,7 +89,7 @@ function PlanItem({ opp, containers, current, onMove }: ItemProps) {
           </svg>
         </button>
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-semibold leading-snug">{opp.title}</p>
+          <p className="text-sm font-bold leading-snug text-navy">{opp.title}</p>
           <p className="text-xs text-ink-muted">
             {TYPE_LABELS[opp.type]}, {opp.timeCommitmentHoursPerWeek} h/week for {opp.durationWeeks}{' '}
             wk
@@ -91,7 +99,7 @@ function PlanItem({ opp, containers, current, onMove }: ItemProps) {
             <select
               value={current}
               onChange={(e) => onMove(e.target.value)}
-              className="min-h-[36px] w-full min-w-0 rounded-md border border-line-strong bg-paper-raised px-2 text-xs"
+              className="min-h-[36px] w-full min-w-0 rounded-full border border-border-strong bg-surface px-3 text-xs text-navy"
               aria-label={`Move ${opp.title} to`}
             >
               {containers.map((c) => (
@@ -120,7 +128,7 @@ function Column({
   return (
     <div
       ref={setNodeRef}
-      className={`${className} transition-shadow ${isOver ? 'ring-2 ring-accent ring-offset-4 ring-offset-paper' : ''}`}
+      className={`${className} transition-shadow ${isOver ? 'rounded-card ring-2 ring-primary ring-offset-4 ring-offset-page' : ''}`}
     >
       {children}
     </div>
@@ -205,23 +213,23 @@ export default function PlanPage() {
     const hours = termHours(items);
     const over = hours > constraints.weeklyHours;
     return (
-      <Column key={t.id} id={t.id} className="rounded-xl">
+      <Column key={t.id} id={t.id} className="rounded-card">
         <Card
           as="section"
           aria-labelledby={`term-${t.id}`}
-          className={`h-full space-y-3 ${over ? 'border-alert/50' : ''}`}
+          className={`h-full space-y-4 ${over ? '!border-amber-line' : ''}`}
           data-testid={`term-${t.id}`}
         >
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <h2 id={`term-${t.id}`} className="flex items-center gap-2 text-lg font-extrabold">
               <span
-                className={`h-3.5 w-3.5 rounded-full border-[3px] ${items.length ? 'border-ink bg-marker' : 'border-line-strong bg-paper-raised'}`}
+                className={`h-3.5 w-3.5 rounded-full border-[3px] ${items.length ? 'border-primary bg-primary' : 'border-border-strong bg-surface'}`}
                 aria-hidden="true"
               />
               {t.label}
             </h2>
             <span
-              className={`text-sm tabular-nums ${over ? 'font-semibold text-alert' : 'text-ink-muted'}`}
+              className={`text-sm tabular-nums ${over ? 'font-bold text-amber' : 'text-muted'}`}
             >
               {hours} / {constraints.weeklyHours} hrs/week
             </span>
@@ -239,15 +247,32 @@ export default function PlanPage() {
               ))}
             </ul>
           ) : (
-            <p className="rounded-xl border-2 border-dashed border-line p-4 text-center text-sm text-ink-muted">
+            <p className="rounded-2xl border-2 border-dashed border-border p-5 text-center text-sm text-muted">
               Drop an opportunity here
             </p>
           )}
           {flags.length > 0 && (
             <ul className="space-y-1.5" aria-label={`Notes for ${t.label}`}>
               {flags.map((f) => (
-                <li key={f.text} className="text-xs text-ink-soft">
-                  <Badge tone={FLAG_STYLE[f.kind].tone} className="mr-1">
+                <li key={f.text} className="text-xs text-body">
+                  <Badge tone={FLAG_STYLE[f.kind].tone} className="mr-1.5">
+                    {f.kind === 'overload' && (
+                      <svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true">
+                        <path
+                          d="M8 1.8 15 14H1Z"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.6"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M8 6.3v3.6M8 11.8v.2"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    )}
                     {FLAG_STYLE[f.kind].label}
                   </Badge>
                   {f.text}
@@ -288,7 +313,7 @@ export default function PlanPage() {
         }}
       >
         <div className="grid gap-6 lg:grid-cols-[18rem_1fr]">
-          <Column id={TRAY} className="rounded-xl lg:sticky lg:top-4 lg:self-start">
+          <Column id={TRAY} className="rounded-card lg:sticky lg:top-28 lg:self-start">
             <Card as="section" aria-labelledby="tray-heading" className="space-y-3">
               <h2 id="tray-heading" className="text-lg font-extrabold">
                 Tray
@@ -313,8 +338,8 @@ export default function PlanPage() {
                   Everything is placed. Drag an item back here to unplan it.
                 </p>
               )}
-              <div className="space-y-1 border-t border-line pt-3">
-                <label htmlFor="tray-add" className="block text-sm font-medium">
+              <div className="space-y-2 border-t border-border pt-4">
+                <label htmlFor="tray-add" className="block text-sm font-semibold text-navy">
                   Add from the catalog
                 </label>
                 <div className="flex gap-2">
@@ -322,7 +347,7 @@ export default function PlanPage() {
                     id="tray-add"
                     value={extra}
                     onChange={(e) => setExtra(e.target.value)}
-                    className="min-h-[44px] w-full min-w-0 rounded-lg border border-line-strong bg-paper-raised px-2 text-sm"
+                    className={`${inputClass} min-w-0 text-sm`}
                   >
                     <option value="">Choose…</option>
                     {extras.map((o) => (
