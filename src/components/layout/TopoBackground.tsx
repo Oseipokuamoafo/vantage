@@ -96,7 +96,7 @@ export function TopoBackground({ strength = 1 }: { strength?: number }) {
       let levelIndex = 0;
       for (let level = LEVEL_MIN; level <= LEVEL_MAX; level += LEVEL_STEP, levelIndex++) {
         const isIndex = levelIndex % INDEX_EVERY === 0;
-        const base = (isIndex ? 0.17 : 0.085) * s;
+        const base = (isIndex ? 0.11 : 0.055) * s;
         ctx!.beginPath();
         for (let j = 0; j < rows - 1; j++) {
           for (let i = 0; i < cols - 1; i++) {
@@ -155,11 +155,11 @@ export function TopoBackground({ strength = 1 }: { strength?: number }) {
         }
         if (active) {
           const g = ctx!.createRadialGradient(pointer.x, pointer.y, 0, pointer.x, pointer.y, 240);
-          g.addColorStop(0, `rgba(31,79,216,${Math.min(0.75, base * 4.2 * pointer.s + base)})`);
-          g.addColorStop(1, `rgba(15,42,38,${base})`);
+          g.addColorStop(0, `rgba(37,99,235,${Math.min(0.55, base * 4 * pointer.s + base)})`);
+          g.addColorStop(1, `rgba(37,99,235,${base})`);
           ctx!.strokeStyle = g;
         } else {
-          ctx!.strokeStyle = `rgba(15,42,38,${base})`;
+          ctx!.strokeStyle = `rgba(37,99,235,${base})`;
         }
         ctx!.lineWidth = isIndex ? 1.35 : 0.8;
         ctx!.stroke();
@@ -240,7 +240,7 @@ export function TopoBackground({ strength = 1 }: { strength?: number }) {
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-0 h-full w-full"
+      className="pointer-events-none fixed inset-0 z-0 h-full w-full [mask-image:linear-gradient(to_bottom,#000_0%,#000_45%,transparent_95%)]"
     />
   );
 }

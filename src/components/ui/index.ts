@@ -1,10 +1,10 @@
 export { Button } from './Button';
 export { Card } from './Card';
+export { Chip, Tag, CheckIcon } from './Chip';
 export { TextField, SelectField, TextAreaField } from './Field';
 export { Badge, type BadgeTone } from './Badge';
 export { Notice } from './Notice';
 export { PageHeader } from './PageHeader';
 export { EmptyState } from './EmptyState';
 export { ScoreMeter } from './ScoreMeter';
-export { buttonClass, inputClass } from './styles';
-export { Reveal } from './Reveal';
+export { buttonClass, inputClass, chipClass } from './styles';

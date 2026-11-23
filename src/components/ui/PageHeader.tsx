@@ -13,17 +13,23 @@ export function PageHeader({
   actions?: ReactNode;
 }) {
   return (
-    <header className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-      <div className="max-w-2xl space-y-2">
-        {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-        <h1 className="text-3xl font-extrabold leading-[1.05] text-ink sm:text-[2.6rem]">
+    <header className="mb-10 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+      <div className="max-w-2xl space-y-3">
+        {eyebrow && (
+          <p className="inline-flex rounded-full bg-tint px-3 py-1 text-sm font-semibold text-primary-active">
+            {eyebrow}
+          </p>
+        )}
+        <h1 className="text-[2rem] font-extrabold tracking-[-0.025em] sm:text-[2.75rem]">
           {title}
         </h1>
         {description && (
-          <div className="max-w-[65ch] text-base leading-relaxed text-ink-soft">{description}</div>
+          <div className="max-w-[65ch] text-base leading-relaxed text-body sm:text-lg">
+            {description}
+          </div>
         )}
       </div>
-      {actions && <div className="flex flex-wrap gap-2">{actions}</div>}
+      {actions && <div className="flex flex-wrap gap-3">{actions}</div>}
     </header>
   );
 }

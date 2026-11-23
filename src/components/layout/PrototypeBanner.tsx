@@ -1,7 +1,7 @@
 export function PrototypeBanner() {
   return (
     <div
-      className="bg-marker px-4 py-1.5 text-center text-xs font-medium text-ink sm:text-sm"
+      className="relative z-50 bg-navy px-4 py-2 text-center text-xs font-medium text-white sm:text-sm"
       role="note"
     >
       <strong className="font-bold">Prototype:</strong> accounts are stored in your browser only.

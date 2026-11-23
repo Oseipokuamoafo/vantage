@@ -15,7 +15,7 @@ export function RequireAdmin({ children }: { children: ReactNode }) {
   if (!user) return <Navigate to="/login" replace state={{ from: location.pathname }} />;
   if (user.role !== 'admin') {
     return (
-      <div role="alert" className="rounded-lg border border-line bg-paper-sunk p-4">
+      <div role="alert" className="rounded-card border border-border bg-surface p-6 shadow-soft">
         The content manager is limited to admin accounts.
       </div>
     );
