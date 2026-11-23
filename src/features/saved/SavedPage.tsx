@@ -82,7 +82,7 @@ function PlanCard({ plan }: { plan: SavedPlan }) {
               value={name}
               onChange={(e) => setName(e.target.value)}
               aria-invalid={nameError ? true : undefined}
-              className="block min-h-[44px] w-full rounded-lg border border-line-strong bg-paper-raised px-3"
+              className="block min-h-[48px] w-full rounded-input border border-border-strong bg-surface px-4 text-navy"
             />
             {nameError && <p className="text-sm text-alert">{nameError}</p>}
           </div>
@@ -129,7 +129,7 @@ function PlanCard({ plan }: { plan: SavedPlan }) {
         </div>
       </dl>
       {changes.length > 0 ? (
-        <div className="rounded-lg border border-caution/30 bg-caution-soft p-3 text-sm">
+        <div className="rounded-2xl border border-amber-line/60 bg-amber-soft p-4 text-sm">
           <p className="font-semibold">Changed since saved</p>
           <ul className="list-disc pl-5">
             {changes.map((c) => (

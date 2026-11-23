@@ -44,7 +44,7 @@ export default function AdminPage() {
       <div
         role="tablist"
         aria-label="Content sections"
-        className="mb-6 flex gap-1 overflow-x-auto border-b border-line"
+        className="mb-8 flex w-fit max-w-full gap-1 overflow-x-auto rounded-full border border-border bg-surface p-1.5 shadow-soft"
       >
         {TABS.map((t, i) => (
           <button
@@ -59,10 +59,8 @@ export default function AdminPage() {
             tabIndex={tab === t.id ? 0 : -1}
             onClick={() => setTab(t.id)}
             onKeyDown={(e) => onKeyDown(e, i)}
-            className={`min-h-[44px] whitespace-nowrap border-b-2 px-3 text-sm font-medium ${
-              tab === t.id
-                ? 'border-accent text-accent-strong'
-                : 'border-transparent text-ink-soft hover:text-ink'
+            className={`min-h-[44px] whitespace-nowrap rounded-full px-4 text-sm font-semibold transition-colors duration-brand ${
+              tab === t.id ? 'bg-primary text-white' : 'text-navy hover:bg-tint'
             }`}
           >
             {t.label}

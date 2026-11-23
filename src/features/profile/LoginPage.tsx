@@ -78,7 +78,7 @@ export default function LoginPage() {
           Create an account
         </Link>
       </div>
-      <details className="rounded-lg bg-paper-sunk p-3 text-sm">
+      <details className="disclosure rounded-2xl bg-tint p-4 text-sm">
         <summary className="cursor-pointer font-medium">Demo admin account</summary>
         <p className="mt-2 text-ink-soft">
           Email <code>{DEMO_ADMIN.email}</code>, password <code>{DEMO_ADMIN.password}</code>.

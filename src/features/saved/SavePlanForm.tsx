@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import { Button } from '../../components/ui';
+import { Button, inputClass } from '../../components/ui';
 import { createPlan, getPlan, updatePlan } from '../../data/plans';
 import { updateWorkspace } from '../../data/workspace';
 import { useStudent } from '../../hooks/useStudent';
@@ -47,8 +47,8 @@ export function SavePlanForm() {
 
   return (
     <form onSubmit={onSaveNew} noValidate className="flex flex-col gap-2 sm:flex-row sm:items-end">
-      <div className="flex-1 space-y-1">
-        <label htmlFor="plan-name" className="block text-sm font-medium">
+      <div className="flex-1 space-y-2">
+        <label htmlFor="plan-name" className="block text-sm font-semibold text-navy">
           Save as a new plan
         </label>
         <input
@@ -61,7 +61,7 @@ export function SavePlanForm() {
           placeholder="e.g. Spring cloud plan"
           aria-invalid={error ? true : undefined}
           aria-describedby={error ? 'plan-name-error' : undefined}
-          className="block min-h-[44px] w-full rounded-lg border border-line-strong bg-paper-raised px-3 py-2"
+          className={inputClass}
         />
         {error && (
           <p id="plan-name-error" className="text-sm font-medium text-alert">

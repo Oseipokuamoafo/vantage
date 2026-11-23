@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { Button, Notice, TextField } from '../../components/ui';
 import { AuthError, signUp } from '../../data/auth';
 import { AuthCard } from './AuthCard';
@@ -7,7 +7,8 @@ import { hasErrors, validateSignUp, type FieldErrors } from './validation';
 
 export default function SignUpPage() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ email: '', password: '', confirm: '' });
+  const [params] = useSearchParams();
+  const [form, setForm] = useState({ email: params.get('email') ?? '', password: '', confirm: '' });
   const [errors, setErrors] = useState<FieldErrors<'email' | 'password' | 'confirm'>>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);

@@ -87,7 +87,7 @@ export function OutcomesTab({ actor }: { actor: string }) {
               setText(e.target.value);
               setResult(null);
             }}
-            className="block min-h-[120px] w-full rounded-lg border border-line-strong bg-paper-raised p-2 font-mono text-xs"
+            className="block min-h-[140px] w-full rounded-input border border-border-strong bg-surface p-3 font-mono text-xs text-navy"
           />
         </div>
         <fieldset className="flex flex-wrap gap-4 text-sm">
@@ -162,7 +162,7 @@ export function OutcomesTab({ actor }: { actor: string }) {
         <h3 id="outcomes-list-heading" className="text-xl font-extrabold">
           Current outcome records ({outcomes.length})
         </h3>
-        <ul className="divide-y divide-line rounded-xl border border-line bg-paper-raised">
+        <ul className="divide-y divide-line rounded-card border border-border bg-surface shadow-soft">
           {outcomes.map((r) => (
             <li
               key={r.id}

@@ -154,7 +154,7 @@ function OpportunityForm({
           {goals.map((g) => (
             <div
               key={g.id}
-              className="grid gap-2 rounded-lg border border-line p-3 sm:grid-cols-[8rem_1fr]"
+              className="grid gap-3 rounded-2xl border border-border bg-page p-4 sm:grid-cols-[8rem_1fr]"
             >
               <TextField
                 label={`${g.name}: signaling`}
@@ -267,7 +267,7 @@ export function OpportunitiesTab({ actor }: { actor: string }) {
           {message}
         </Notice>
       )}
-      <ul className="divide-y divide-line rounded-xl border border-line bg-paper-raised">
+      <ul className="divide-y divide-line rounded-card border border-border bg-surface shadow-soft">
         {opps.map((o) => (
           <li
             key={o.id}

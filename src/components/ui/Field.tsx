@@ -18,24 +18,40 @@ interface FieldShellProps {
 
 function FieldShell({ id, label, hint, error, required, children }: FieldShellProps) {
   return (
-    <div className="space-y-1.5">
-      <label htmlFor={id} className="block text-sm font-medium text-ink">
+    <div className="space-y-2">
+      <label htmlFor={id} className="block text-sm font-semibold text-navy">
         {label}
         {required ? (
-          <span className="text-ink-muted"> (required)</span>
+          <span className="font-normal text-muted"> (required)</span>
         ) : (
-          <span className="text-ink-muted"> (optional)</span>
+          <span className="font-normal text-muted"> (optional)</span>
         )}
       </label>
       {children}
       {hint && (
-        <p id={`${id}-hint`} className="text-sm text-ink-muted">
+        <p id={`${id}-hint`} className="text-sm text-muted">
           {hint}
         </p>
       )}
       {error && (
-        <p id={`${id}-error`} className="text-sm font-medium text-alert">
-          {error}
+        <p
+          id={`${id}-error`}
+          className="flex items-start gap-1.5 text-sm font-semibold text-danger"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            aria-hidden="true"
+            className="mt-0.5 shrink-0"
+          >
+            <circle cx="8" cy="8" r="7" fill="currentColor" />
+            <path d="M8 4.5v4.2M8 11v.3" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" />
+          </svg>
+          <span>
+            <span className="sr-only">Error: </span>
+            {error}
+          </span>
         </p>
       )}
     </div>
@@ -117,7 +133,7 @@ export function TextAreaField({
         required={required}
         aria-invalid={error ? true : undefined}
         aria-describedby={describedBy(id, hint, error)}
-        className={`${inputClass} min-h-[96px]`}
+        className={`${inputClass} min-h-[112px] py-3`}
         {...rest}
       />
     </FieldShell>

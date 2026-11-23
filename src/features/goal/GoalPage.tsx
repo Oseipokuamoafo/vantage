@@ -61,9 +61,9 @@ export default function GoalPage() {
             return (
               <div
                 key={g.id}
-                className={`spotlight rounded-2xl border bg-paper-raised p-5 transition duration-200 ${
+                className={`rounded-card border bg-surface p-5 shadow-soft transition duration-brand sm:p-6 ${
                   selected === g.id ? 'border-accent ring-2 ring-accent/30' : 'border-line'
-                } ${selectable ? 'hover:border-ink hover:shadow-lift' : 'opacity-70'}`}
+                } ${selectable ? 'hover:border-primary/50 hover:shadow-hover' : 'opacity-70'}`}
               >
                 <div className="flex items-start gap-3">
                   <input
