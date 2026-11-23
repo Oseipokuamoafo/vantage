@@ -1,0 +1,76 @@
+/*
+ * Vantage design tokens. Tailwind (tailwind.config.ts) maps its theme onto these variables,
+ * so changing a value here restyles the whole app. See docs/DESIGN.md.
+ */
+
+/* Plus Jakarta Sans, variable weight, Latin subset only (self-hosted, preloaded in index.html). */
+@font-face {
+  font-family: 'Plus Jakarta Sans Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url('/fonts/plus-jakarta-sans-latin.woff2') format('woff2-variations');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  /* Surfaces */
+  --color-page: #f7f9fc;
+  --color-surface: #ffffff;
+  --color-tint: #eef3fd;
+
+  /* Brand */
+  --color-primary: #2563eb; /* 5.2:1 on white, 4.9:1 on page */
+  --color-primary-hover: #1d4ed8;
+  --color-primary-active: #1e40af;
+
+  /* Text */
+  --color-navy: #0f1f4b; /* headings, strong text: 15:1 on page */
+  --color-body: #475569; /* 7.2:1 on page */
+  --color-muted: #5b6b82; /* 4.9:1 on tint, 5.4:1 on white (adjusted from #64748b for AA on tint) */
+
+  /* Lines */
+  --color-border: #dce3f0; /* decorative card edges */
+  --color-border-strong: #7d8aa3; /* form-field boundaries: 3.3:1 on page (WCAG 1.4.11) */
+
+  /* Status (always paired with an icon and text) */
+  --color-amber: #92400e;
+  --color-amber-line: #d97706;
+  --color-amber-soft: #fffbeb;
+  --color-red: #b91c1c;
+  --color-red-soft: #fef2f2;
+
+  /* RGB channels of the colors above, for Tailwind opacity modifiers (e.g. bg-primary/10). */
+  --rgb-page: 247 249 252;
+  --rgb-surface: 255 255 255;
+  --rgb-tint: 238 243 253;
+  --rgb-primary: 37 99 235;
+  --rgb-primary-hover: 29 78 216;
+  --rgb-primary-active: 30 64 175;
+  --rgb-navy: 15 31 75;
+  --rgb-body: 71 85 105;
+  --rgb-muted: 91 107 130;
+  --rgb-border: 220 227 240;
+  --rgb-border-strong: 125 138 163;
+  --rgb-amber: 146 64 14;
+  --rgb-amber-line: 217 119 6;
+  --rgb-amber-soft: 255 251 235;
+  --rgb-red: 185 28 28;
+  --rgb-red-soft: 254 242 242;
+
+  /* Shape */
+  --radius-card: 24px;
+  --radius-nav: 24px;
+  --radius-input: 14px;
+  --radius-pill: 9999px;
+
+  /* Elevation */
+  --shadow-soft: 0 8px 30px rgba(15, 31, 75, 0.06);
+  --shadow-hover: 0 14px 40px rgba(15, 31, 75, 0.1);
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --duration: 180ms;
+}
