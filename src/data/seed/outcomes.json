@@ -1,0 +1,90 @@
+[
+  {
+    "id": "out-aws-saa",
+    "goalTypeId": "cloud-internship",
+    "opportunityId": "aws-saa",
+    "metric": "Reported a cloud or SWE internship offer within 12 months",
+    "outcomeRate": 0.43,
+    "sampleSize": 14,
+    "cohort": "Sample cohort A (fabricated for prototype)",
+    "source": "Prototype sample data: not real statistics",
+    "dataQuality": "team_estimate"
+  },
+  {
+    "id": "out-aws-ccp",
+    "goalTypeId": "cloud-internship",
+    "opportunityId": "aws-ccp",
+    "metric": "Reported a cloud or SWE internship offer within 12 months",
+    "outcomeRate": 0.29,
+    "sampleSize": 17,
+    "cohort": "Sample cohort A (fabricated for prototype)",
+    "source": "Prototype sample data: not real statistics",
+    "dataQuality": "team_estimate"
+  },
+  {
+    "id": "out-serverless",
+    "goalTypeId": "cloud-internship",
+    "opportunityId": "project-serverless-resume",
+    "metric": "Reported a cloud or SWE internship offer within 12 months",
+    "outcomeRate": 0.5,
+    "sampleSize": 12,
+    "cohort": "Sample cohort A (fabricated for prototype)",
+    "source": "Prototype sample data: not real statistics",
+    "dataQuality": "team_estimate"
+  },
+  {
+    "id": "out-cloud-club",
+    "goalTypeId": "cloud-internship",
+    "opportunityId": "org-cloud-club",
+    "metric": "Reported a cloud or SWE internship offer within 12 months",
+    "outcomeRate": 0.33,
+    "sampleSize": 6,
+    "cohort": "Sample cohort A (fabricated for prototype)",
+    "source": "Prototype sample data: not real statistics",
+    "dataQuality": "team_estimate"
+  },
+  {
+    "id": "out-terraform",
+    "goalTypeId": "cloud-internship",
+    "opportunityId": "terraform-associate",
+    "metric": "Reported a cloud or SWE internship offer within 12 months",
+    "outcomeRate": 0.4,
+    "sampleSize": 10,
+    "cohort": "Sample cohort A (fabricated for prototype)",
+    "source": "Prototype sample data: not real statistics",
+    "dataQuality": "team_estimate"
+  },
+  {
+    "id": "out-bigtech-return",
+    "goalTypeId": "cloud-internship",
+    "opportunityId": "cloud-internship-bigtech",
+    "metric": "Reported a return or full-time offer after the internship",
+    "outcomeRate": 0.62,
+    "sampleSize": 21,
+    "cohort": "Sample cohort B (fabricated for prototype)",
+    "source": "Prototype sample data: not real statistics",
+    "dataQuality": "team_estimate"
+  },
+  {
+    "id": "out-campus-it",
+    "goalTypeId": "cloud-internship",
+    "opportunityId": "campus-it-job",
+    "metric": "Reported a cloud or SWE internship offer within 12 months",
+    "outcomeRate": 0.38,
+    "sampleSize": 8,
+    "cohort": "Sample cohort B (fabricated for prototype)",
+    "source": "Prototype sample data: not real statistics",
+    "dataQuality": "team_estimate"
+  },
+  {
+    "id": "out-reu",
+    "goalTypeId": "cloud-internship",
+    "opportunityId": "reu-distributed-systems",
+    "metric": "Reported a cloud or SWE internship offer within 12 months",
+    "outcomeRate": 0.45,
+    "sampleSize": 11,
+    "cohort": "Sample cohort B (fabricated for prototype)",
+    "source": "Prototype sample data: not real statistics",
+    "dataQuality": "team_estimate"
+  }
+]

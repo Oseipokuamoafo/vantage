@@ -1,0 +1,56 @@
+[
+  {
+    "id": "marcus",
+    "name": "Marcus",
+    "summary": "First-generation sophomore at a state school, about 8 hours a week, tight budget.",
+    "story": "Marcus is aiming for a cloud engineering internship. He works part time, so he has roughly 8 hours a week and about $100 to spend, and wants to see which options fit those limits.",
+    "email": "marcus@demo.vantage",
+    "profile": {
+      "year": "sophomore",
+      "major": "Information Technology",
+      "institution": "Central State University (sample)",
+      "firstGen": "yes",
+      "transferStudent": "no",
+      "workingWhileStudying": "yes"
+    },
+    "goalTypeId": "cloud-internship",
+    "constraints": { "weeklyHours": 8, "budgetUSD": 100, "semestersRemaining": 5 },
+    "compareIds": []
+  },
+  {
+    "id": "priya",
+    "name": "Priya",
+    "summary": "Junior with three semesters left who needs to sequence opportunities carefully.",
+    "story": "Priya is a junior with three semesters left. She wants to lay out certifications, projects and recruiting windows across that time without overloading any term.",
+    "email": "priya@demo.vantage",
+    "profile": {
+      "year": "junior",
+      "major": "Computer Science",
+      "institution": "Lakeside University (sample)",
+      "firstGen": "prefer_not",
+      "transferStudent": "yes",
+      "workingWhileStudying": "no"
+    },
+    "goalTypeId": "cloud-internship",
+    "constraints": { "weeklyHours": 12, "budgetUSD": 300, "semestersRemaining": 3 },
+    "compareIds": ["aws-saa", "cloud-internship-bigtech", "terraform-associate"]
+  },
+  {
+    "id": "devon",
+    "name": "Devon",
+    "summary": "Weighing a certification, a side project and a student org, and curious how outcomes differ.",
+    "story": "Devon is deciding between a certification, a side project and a student org, and wants to see how each one differs in time, skills, signaling and reported outcomes.",
+    "email": "devon@demo.vantage",
+    "profile": {
+      "year": "sophomore",
+      "major": "Computer Engineering",
+      "institution": "Riverside College (sample)",
+      "firstGen": "no",
+      "transferStudent": "no",
+      "workingWhileStudying": "no"
+    },
+    "goalTypeId": "cloud-internship",
+    "constraints": { "weeklyHours": 10, "budgetUSD": 200, "semestersRemaining": 5 },
+    "compareIds": ["aws-saa", "project-serverless-resume", "org-cloud-club"]
+  }
+]

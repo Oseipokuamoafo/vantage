@@ -1,0 +1,531 @@
+[
+  {
+    "id": "aws-ccp",
+    "type": "certification",
+    "title": "AWS Certified Cloud Practitioner",
+    "description": "Entry-level AWS exam covering core cloud concepts, billing and basic services. No hands-on lab required to pass.",
+    "timeCommitmentHoursPerWeek": 4,
+    "durationWeeks": 6,
+    "costUSD": 100,
+    "skillsBuilt": ["cloud fundamentals", "aws"],
+    "signalingNotes": "Widely recognized entry credential; shows baseline cloud vocabulary rather than hands-on skill.",
+    "timingWindows": [],
+    "goalRelevance": {
+      "cloud-internship": {
+        "signaling": 5,
+        "rationale": "Recognized by recruiters as an introductory signal."
+      }
+    },
+    "source": "Prototype sample data: exam fee from provider listing at time of writing (verify current price)",
+    "dataQuality": "limited"
+  },
+  {
+    "id": "aws-saa",
+    "type": "certification",
+    "title": "AWS Certified Solutions Architect – Associate",
+    "description": "Associate-level AWS exam on designing resilient, secure architectures. Commonly paired with hands-on practice labs.",
+    "timeCommitmentHoursPerWeek": 6,
+    "durationWeeks": 10,
+    "costUSD": 150,
+    "skillsBuilt": [
+      "aws",
+      "cloud fundamentals",
+      "computer networking",
+      "security",
+      "system design"
+    ],
+    "signalingNotes": "Frequently listed in cloud job descriptions; carries more weight than entry-level exams.",
+    "timingWindows": [],
+    "goalRelevance": {
+      "cloud-internship": {
+        "signaling": 7,
+        "rationale": "Associate-level credential that maps to common cloud intern tasks."
+      }
+    },
+    "source": "Prototype sample data: exam fee from provider listing at time of writing (verify current price)",
+    "dataQuality": "limited"
+  },
+  {
+    "id": "az-900",
+    "type": "certification",
+    "title": "Microsoft Azure Fundamentals (AZ-900)",
+    "description": "Introductory Azure exam on cloud concepts, core services, pricing and governance.",
+    "timeCommitmentHoursPerWeek": 3,
+    "durationWeeks": 4,
+    "costUSD": 99,
+    "skillsBuilt": ["cloud fundamentals", "azure"],
+    "signalingNotes": "Introductory signal; student vouchers are sometimes available through campus programs.",
+    "timingWindows": [],
+    "goalRelevance": {
+      "cloud-internship": {
+        "signaling": 4,
+        "rationale": "Introductory credential; useful mostly for Azure-focused employers."
+      }
+    },
+    "source": "Prototype sample data (verify with provider)",
+    "dataQuality": "limited"
+  },
+  {
+    "id": "az-104",
+    "type": "certification",
+    "title": "Microsoft Azure Administrator (AZ-104)",
+    "description": "Associate-level Azure exam on identity, storage, compute and virtual networking administration.",
+    "timeCommitmentHoursPerWeek": 6,
+    "durationWeeks": 10,
+    "costUSD": 165,
+    "skillsBuilt": ["azure", "computer networking", "security", "cloud fundamentals"],
+    "signalingNotes": "Hands-on administration credential; signals practical Azure operations skills.",
+    "timingWindows": [],
+    "goalRelevance": {
+      "cloud-internship": {
+        "signaling": 6,
+        "rationale": "Associate-level; relevant for Azure-heavy teams."
+      }
+    },
+    "source": "Prototype sample data (verify with provider)",
+    "dataQuality": "limited"
+  },
+  {
+    "id": "terraform-associate",
+    "type": "certification",
+    "title": "HashiCorp Terraform Associate",
+    "description": "Exam on infrastructure-as-code concepts and Terraform workflow.",
+    "timeCommitmentHoursPerWeek": 4,
+    "durationWeeks": 6,
+    "costUSD": 70.5,
+    "skillsBuilt": ["infrastructure as code", "cloud fundamentals"],
+    "signalingNotes": "Signals infrastructure-as-code literacy, which many DevOps roles list.",
+    "timingWindows": [],
+    "goalRelevance": {
+      "cloud-internship": {
+        "signaling": 6,
+        "rationale": "IaC appears in many DevOps and platform intern postings."
+      }
+    },
+    "source": "Prototype sample data (verify with provider)",
+    "dataQuality": "limited"
+  },
+  {
+    "id": "gcp-ace",
+    "type": "certification",
+    "title": "Google Cloud Associate Cloud Engineer",
+    "description": "Associate exam on deploying and operating workloads on Google Cloud.",
+    "timeCommitmentHoursPerWeek": 6,
+    "durationWeeks": 10,
+    "costUSD": 125,
+    "skillsBuilt": ["gcp", "cloud fundamentals", "computer networking", "containers"],
+    "signalingNotes": "Associate-level signal, most relevant to Google Cloud shops.",
+    "timingWindows": [],
+    "goalRelevance": {
+      "cloud-internship": {
+        "signaling": 6,
+        "rationale": "Associate-level credential for GCP-focused teams."
+      }
+    },
+    "source": "Prototype sample data (verify with provider)",
+    "dataQuality": "limited"
+  },
+  {
+    "id": "kcna",
+    "type": "certification",
+    "title": "Kubernetes and Cloud Native Associate (KCNA)",
+    "description": "Entry-level exam on Kubernetes and the cloud-native ecosystem.",
+    "timeCommitmentHoursPerWeek": 4,
+    "durationWeeks": 8,
+    "costUSD": 250,
+    "skillsBuilt": ["containers", "cloud fundamentals", "linux"],
+    "signalingNotes": "Niche but growing signal for platform and container-focused roles.",
+    "timingWindows": [],
+    "goalRelevance": {
+      "cloud-internship": {
+        "signaling": 5,
+        "rationale": "Signals container literacy; less widely requested than AWS/Azure exams."
+      }
+    },
+    "source": "Prototype sample data (verify with provider)",
+    "dataQuality": "limited"
+  },
+  {
+    "id": "comptia-network-plus",
+    "type": "certification",
+    "title": "CompTIA Network+",
+    "description": "Vendor-neutral networking exam covering protocols, troubleshooting and network security.",
+    "timeCommitmentHoursPerWeek": 6,
+    "durationWeeks": 10,
+    "costUSD": 358,
+    "skillsBuilt": ["computer networking", "security"],
+    "signalingNotes": "Recognized foundation for networking; less cloud-specific.",
+    "timingWindows": [],
+    "goalRelevance": {
+      "cloud-internship": {
+        "signaling": 4,
+        "rationale": "Networking foundation; indirectly relevant to cloud roles."
+      }
+    },
+    "source": "Prototype sample data (verify with provider)",
+    "dataQuality": "limited"
+  },
+  {
+    "id": "project-serverless-resume",
+    "type": "side_project",
+    "title": "Serverless portfolio site on AWS",
+    "description": "Build and deploy a personal site with a serverless visitor counter, infrastructure as code and an automated deploy pipeline.",
+    "timeCommitmentHoursPerWeek": 5,
+    "durationWeeks": 6,
+    "costUSD": 10,
+    "skillsBuilt": ["aws", "infrastructure as code", "ci/cd", "python", "cloud fundamentals"],
+    "signalingNotes": "A public repo and live site give interviewers something concrete to discuss.",
+    "timingWindows": [],
+    "goalRelevance": {
+      "cloud-internship": {
+        "signaling": 6,
+        "rationale": "Demonstrates hands-on work that can be shown in interviews."
+      }
+    },
+    "source": "Prototype sample data (verify with provider)",
+    "dataQuality": "team_estimate"
+  },
+  {
+    "id": "project-container-pipeline",
+    "type": "side_project",
+    "title": "Containerized app with Terraform and GitHub Actions",
+    "description": "Containerize a small web app, provision it with Terraform and deploy it through a CI/CD pipeline.",
+    "timeCommitmentHoursPerWeek": 6,
+    "durationWeeks": 8,
+    "costUSD": 20,
+    "skillsBuilt": ["containers", "infrastructure as code", "ci/cd", "linux"],
+    "signalingNotes": "Shows an end-to-end DevOps workflow; depth of the write-up matters.",
+    "timingWindows": [],
+    "goalRelevance": {
+      "cloud-internship": {
+        "signaling": 6,
+        "rationale": "Mirrors common DevOps intern tasks."
+      }
+    },
+    "source": "Prototype sample data (verify with provider)",
+    "dataQuality": "team_estimate"
+  },
+  {
+    "id": "project-homelab",
+    "type": "side_project",
+    "title": "Linux home lab and networking project",
+    "description": "Set up a small Linux server, configure networking, firewall rules and monitoring, and document the setup.",
+    "timeCommitmentHoursPerWeek": 4,
+    "durationWeeks": 8,
+    "costUSD": 60,
+    "skillsBuilt": ["linux", "computer networking", "security"],
+    "signalingNotes": "Good talking point for operations-focused roles; less visible than a public repo.",
+    "timingWindows": [],
+    "goalRelevance": {
+      "cloud-internship": {
+        "signaling": 4,
+        "rationale": "Builds fundamentals; signaling depends on documentation."
+      }
+    },
+    "source": "Prototype sample data (verify with provider)",
+    "dataQuality": "team_estimate"
+  },
+  {
+    "id": "hackathon-weekend",
+    "type": "side_project",
+    "title": "Weekend hackathon",
+    "description": "Short-format team event (often 24–48 hours) building a prototype, sometimes with cloud credits from sponsors.",
+    "timeCommitmentHoursPerWeek": 20,
+    "durationWeeks": 1,
+    "costUSD": 0,
+    "skillsBuilt": ["python", "system design", "cloud fundamentals"],
+    "signalingNotes": "Sponsors and recruiters sometimes attend; outcomes vary widely by event.",
+    "timingWindows": [
+      {
+        "label": "Event season",
+        "season": "fall",
+        "note": "Many collegiate hackathons run in fall and spring."
+      },
+      {
+        "label": "Event season",
+        "season": "spring",
+        "note": "Many collegiate hackathons run in fall and spring."
+      }
+    ],
+    "goalRelevance": {
+      "cloud-internship": {
+        "signaling": 4,
+        "rationale": "Short event; signaling depends on the project and connections made."
+      }
+    },
+    "source": "Prototype sample data (verify with provider)",
+    "dataQuality": "team_estimate"
+  },
+  {
+    "id": "org-cloud-club",
+    "type": "student_org",
+    "title": "Student cloud computing club",
+    "description": "Campus club running cloud workshops, study groups for certifications and employer info sessions.",
+    "timeCommitmentHoursPerWeek": 3,
+    "durationWeeks": 30,
+    "costUSD": 0,
+    "skillsBuilt": ["cloud fundamentals", "aws", "professional networking"],
+    "signalingNotes": "Leadership roles signal more than general membership.",
+    "timingWindows": [],
+    "goalRelevance": {
+      "cloud-internship": {
+        "signaling": 5,
+        "rationale": "Peer study and employer sessions; signaling grows with a leadership role."
+      }
+    },
+    "source": "Prototype sample data (verify with provider)",
+    "dataQuality": "team_estimate"
+  },
+  {
+    "id": "org-tech-officer",
+    "type": "student_org",
+    "title": "Officer role in a technical student org",
+    "description": "Officer position (e.g. in an ACM, NSBE, SHPE or similar chapter) organizing events and coordinating with sponsors.",
+    "timeCommitmentHoursPerWeek": 4,
+    "durationWeeks": 30,
+    "costUSD": 0,
+    "skillsBuilt": ["professional networking", "leadership"],
+    "signalingNotes": "Shows leadership and sponsor contact; skill-building is less technical.",
+    "timingWindows": [
+      {
+        "label": "Officer elections",
+        "season": "spring",
+        "note": "Many chapters elect officers in spring for the next year."
+      }
+    ],
+    "goalRelevance": {
+      "cloud-internship": {
+        "signaling": 4,
+        "rationale": "Leadership signal and recruiter access through sponsors."
+      }
+    },
+    "source": "Prototype sample data (verify with provider)",
+    "dataQuality": "team_estimate"
+  },
+  {
+    "id": "cloud-internship-bigtech",
+    "type": "internship",
+    "title": "Cloud / SWE internship at a large tech company",
+    "description": "Paid summer internship on a cloud, infrastructure or software engineering team.",
+    "timeCommitmentHoursPerWeek": 40,
+    "durationWeeks": 11,
+    "costUSD": 0,
+    "skillsBuilt": ["cloud fundamentals", "ci/cd", "system design", "python", "aws"],
+    "signalingNotes": "Strongest direct signal for a cloud role; highly competitive.",
+    "timingWindows": [
+      {
+        "label": "Early recruiting cycle",
+        "season": "fall",
+        "note": "Many summer internship applications open August–October of the year before."
+      },
+      {
+        "label": "Internship term",
+        "season": "summer",
+        "note": "Most programs run 10–12 weeks in summer."
+      }
+    ],
+    "goalRelevance": {
+      "cloud-internship": {
+        "signaling": 10,
+        "rationale": "Direct experience in the target role."
+      }
+    },
+    "source": "Prototype sample data (verify with provider)",
+    "dataQuality": "team_estimate"
+  },
+  {
+    "id": "early-career-program",
+    "type": "internship",
+    "title": "Early-career program for first and second year students",
+    "description": "Paid summer program for first- and second-year students, mixing a project with mentorship.",
+    "timeCommitmentHoursPerWeek": 40,
+    "durationWeeks": 12,
+    "costUSD": 0,
+    "skillsBuilt": ["python", "system design", "cloud fundamentals"],
+    "signalingNotes": "Designed for students early in their degree; often leads into later internships.",
+    "timingWindows": [
+      {
+        "label": "Early recruiting cycle",
+        "season": "fall",
+        "note": "Applications often open July–September and close early."
+      },
+      {
+        "label": "Program term",
+        "season": "summer",
+        "note": "Runs in summer."
+      }
+    ],
+    "goalRelevance": {
+      "cloud-internship": {
+        "signaling": 8,
+        "rationale": "Strong early signal; often a pipeline into later internships."
+      }
+    },
+    "source": "Prototype sample data (verify with provider)",
+    "dataQuality": "team_estimate"
+  },
+  {
+    "id": "campus-it-job",
+    "type": "internship",
+    "title": "Part-time campus IT or research computing job",
+    "description": "Paid part-time role supporting campus servers, labs or help desk, often with flexible hours.",
+    "timeCommitmentHoursPerWeek": 10,
+    "durationWeeks": 15,
+    "costUSD": 0,
+    "skillsBuilt": ["linux", "computer networking", "security"],
+    "signalingNotes": "Real operations experience; recognized as relevant work history.",
+    "timingWindows": [
+      {
+        "label": "Campus hiring",
+        "season": "fall",
+        "note": "Campus roles often hire at the start of each semester."
+      },
+      {
+        "label": "Campus hiring",
+        "season": "spring",
+        "note": "Campus roles often hire at the start of each semester."
+      }
+    ],
+    "goalRelevance": {
+      "cloud-internship": {
+        "signaling": 5,
+        "rationale": "Paid operations experience that can be listed as work history."
+      }
+    },
+    "source": "Prototype sample data (verify with provider)",
+    "dataQuality": "team_estimate"
+  },
+  {
+    "id": "startup-cloud-ops",
+    "type": "internship",
+    "title": "Part-time cloud operations internship at a startup",
+    "description": "Part-time paid internship supporting cloud infrastructure at a small company.",
+    "timeCommitmentHoursPerWeek": 20,
+    "durationWeeks": 12,
+    "costUSD": 0,
+    "skillsBuilt": ["aws", "linux", "ci/cd", "containers"],
+    "signalingNotes": "Hands-on scope can be broad; company name recognition varies.",
+    "timingWindows": [
+      {
+        "label": "Rolling hiring",
+        "season": "spring",
+        "note": "Smaller companies often hire on a rolling basis."
+      }
+    ],
+    "goalRelevance": {
+      "cloud-internship": {
+        "signaling": 7,
+        "rationale": "Direct cloud experience at smaller scale."
+      }
+    },
+    "source": "Prototype sample data (verify with provider)",
+    "dataQuality": "team_estimate"
+  },
+  {
+    "id": "reu-distributed-systems",
+    "type": "research_reu",
+    "title": "NSF REU in distributed or cloud systems",
+    "description": "Funded summer research experience in a university lab working on distributed or cloud systems.",
+    "timeCommitmentHoursPerWeek": 40,
+    "durationWeeks": 10,
+    "costUSD": 0,
+    "skillsBuilt": ["research", "python", "system design", "cloud fundamentals"],
+    "signalingNotes": "Strong signal for research paths; relevant but indirect for industry cloud roles.",
+    "timingWindows": [
+      {
+        "label": "REU application window",
+        "season": "spring",
+        "note": "Many REU applications are due between December and February."
+      },
+      {
+        "label": "Program term",
+        "season": "summer",
+        "note": "Runs in summer, typically 8–10 weeks."
+      }
+    ],
+    "goalRelevance": {
+      "cloud-internship": {
+        "signaling": 6,
+        "rationale": "Shows systems depth; indirect for industry roles."
+      },
+      "cs-phd": {
+        "signaling": 8,
+        "rationale": "Research experience is central to PhD applications."
+      }
+    },
+    "source": "Prototype sample data (verify with provider)",
+    "dataQuality": "team_estimate"
+  },
+  {
+    "id": "faculty-research-hpc",
+    "type": "research_reu",
+    "title": "Semester research with a faculty cloud/HPC lab",
+    "description": "Part-time undergraduate research during the semester, often for credit or a small stipend.",
+    "timeCommitmentHoursPerWeek": 8,
+    "durationWeeks": 15,
+    "costUSD": 0,
+    "skillsBuilt": ["research", "linux", "python"],
+    "signalingNotes": "Builds a faculty reference; industry signaling depends on the project.",
+    "timingWindows": [],
+    "goalRelevance": {
+      "cloud-internship": {
+        "signaling": 5,
+        "rationale": "Faculty reference and systems exposure."
+      },
+      "cs-phd": {
+        "signaling": 7,
+        "rationale": "Faculty letters and research output matter for PhD admissions."
+      }
+    },
+    "source": "Prototype sample data (verify with provider)",
+    "dataQuality": "team_estimate"
+  },
+  {
+    "id": "finance-club",
+    "type": "student_org",
+    "title": "Investment or finance club (placeholder)",
+    "description": "Placeholder entry for the banking track. Content to be added by the team.",
+    "timeCommitmentHoursPerWeek": 4,
+    "durationWeeks": 30,
+    "costUSD": 0,
+    "skillsBuilt": ["professional networking", "valuation"],
+    "signalingNotes": "Placeholder.",
+    "timingWindows": [],
+    "goalRelevance": {
+      "cloud-internship": {
+        "signaling": 1,
+        "rationale": "Limited relevance to cloud roles."
+      },
+      "bb-banking": {
+        "signaling": 6,
+        "rationale": "Placeholder estimate."
+      }
+    },
+    "source": "Prototype sample data (verify with provider)",
+    "dataQuality": "team_estimate"
+  },
+  {
+    "id": "financial-modeling-course",
+    "type": "certification",
+    "title": "Financial modeling course (placeholder)",
+    "description": "Placeholder entry for the banking track. Content to be added by the team.",
+    "timeCommitmentHoursPerWeek": 5,
+    "durationWeeks": 6,
+    "costUSD": 200,
+    "skillsBuilt": ["financial modeling", "excel", "valuation"],
+    "signalingNotes": "Placeholder.",
+    "timingWindows": [],
+    "goalRelevance": {
+      "cloud-internship": {
+        "signaling": 0,
+        "rationale": "Not relevant to cloud roles."
+      },
+      "bb-banking": {
+        "signaling": 5,
+        "rationale": "Placeholder estimate."
+      }
+    },
+    "source": "Prototype sample data (verify with provider)",
+    "dataQuality": "team_estimate"
+  }
+]

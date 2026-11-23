@@ -1,0 +1,71 @@
+[
+  {
+    "id": "cloud-internship",
+    "name": "Cloud engineering internship",
+    "description": "A summer or semester internship in cloud engineering, DevOps, site reliability or cloud-focused software engineering.",
+    "examples": [
+      "Cloud support or cloud engineering intern at a large tech company",
+      "DevOps / platform intern at a mid-size company or startup",
+      "Infrastructure intern on a university or public-sector IT team"
+    ],
+    "status": "active",
+    "weights": { "time": 0.25, "skill": 0.35, "signaling": 0.4 },
+    "targetSkills": [
+      "cloud fundamentals",
+      "aws",
+      "azure",
+      "gcp",
+      "computer networking",
+      "linux",
+      "infrastructure as code",
+      "ci/cd",
+      "containers",
+      "python",
+      "security",
+      "system design"
+    ],
+    "skillSaturation": 4,
+    "timeHorizonHours": 480,
+    "source": "Prototype sample data: weights are a team estimate (verify with recruiters and advisors)",
+    "dataQuality": "team_estimate"
+  },
+  {
+    "id": "bb-banking",
+    "name": "Bulge bracket banking",
+    "description": "A summer analyst role at a large investment bank. Placeholder track: content is minimal until the team adds it.",
+    "examples": ["Investment banking summer analyst", "Markets summer analyst"],
+    "status": "coming_soon",
+    "weights": { "time": 0.2, "skill": 0.3, "signaling": 0.5 },
+    "targetSkills": [
+      "financial modeling",
+      "excel",
+      "accounting",
+      "valuation",
+      "professional networking"
+    ],
+    "skillSaturation": 3,
+    "timeHorizonHours": 480,
+    "source": "Prototype placeholder: weights are a team estimate",
+    "dataQuality": "team_estimate"
+  },
+  {
+    "id": "cs-phd",
+    "name": "Top-5 CS PhD",
+    "description": "Admission to a highly selective computer science PhD program. Placeholder track: content is minimal until the team adds it.",
+    "examples": ["PhD in systems or distributed computing", "PhD in machine learning"],
+    "status": "coming_soon",
+    "weights": { "time": 0.15, "skill": 0.35, "signaling": 0.5 },
+    "targetSkills": [
+      "research",
+      "academic writing",
+      "algorithms",
+      "machine learning",
+      "python",
+      "system design"
+    ],
+    "skillSaturation": 3,
+    "timeHorizonHours": 600,
+    "source": "Prototype placeholder: weights are a team estimate",
+    "dataQuality": "team_estimate"
+  }
+]
