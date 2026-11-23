@@ -7,7 +7,7 @@ test('Priya: keyboard-only drag-and-drop places an opportunity in a semester', a
   await page.goto('./');
 
   // Reach the persona button with the keyboard only.
-  const priya = page.getByRole('button', { name: 'Try Vantage as Priya' });
+  const priya = page.getByRole('button', { name: 'Try as Priya' });
   for (let i = 0; i < 80 && !(await priya.evaluate((el) => el === document.activeElement)); i++) {
     await page.keyboard.press('Tab');
   }
@@ -24,7 +24,12 @@ test('Priya: keyboard-only drag-and-drop places an opportunity in a semester', a
   await page.keyboard.press('Space');
   // dnd-kit marks the active handle as pressed while it is being dragged.
   await expect(handle).toHaveAttribute('aria-pressed', 'true');
-  for (let i = 0; i < 14; i++) await page.keyboard.press('ArrowRight');
+  // Move right until dnd-kit's live region reports the item is over a semester.
+  const live = page.locator('[id^="DndLiveRegion"]');
+  for (let i = 0; i < 60; i++) {
+    await page.keyboard.press('ArrowRight');
+    if (/is over (Spring|Summer|Fall) \d{4}/.test((await live.textContent()) ?? '')) break;
+  }
   await page.keyboard.press('Space');
   await expect(handle).not.toHaveAttribute('aria-pressed', 'true');
 

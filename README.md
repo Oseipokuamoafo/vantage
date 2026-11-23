@@ -16,11 +16,14 @@ the decision to the student.
 
 **Live demo:** https://oseipokuamoafo.github.io/vantage/ · **Repository:** https://github.com/Oseipokuamoafo/vantage
 
-| Landing                                       | Compare                                          | Plan                                           |
-| --------------------------------------------- | ------------------------------------------------ | ---------------------------------------------- |
-| ![Landing page](docs/screenshots/landing.png) | ![Comparison view](docs/screenshots/compare.png) | ![Semester planner](docs/screenshots/plan.png) |
+| Landing                                                      | Compare                                                         | Plan                                                      |
+| ------------------------------------------------------------ | --------------------------------------------------------------- | --------------------------------------------------------- |
+| ![Landing page](docs/screenshots/after-landing-1440.png)     | ![Comparison view](docs/screenshots/after-compare-1440.png)     | ![Semester planner](docs/screenshots/after-plan-1440.png) |
+| ![Landing on mobile](docs/screenshots/after-landing-360.png) | ![Comparison on mobile](docs/screenshots/after-compare-360.png) | ![Planner on mobile](docs/screenshots/after-plan-360.png) |
 
-_Screenshots show the Devon demo persona. All figures are prototype sample data._
+_Screenshots use the fictional demo personas and sample data. Earlier designs are kept as
+`docs/screenshots/before-*.png` for comparison. The design system is documented in
+[docs/DESIGN.md](docs/DESIGN.md)._
 
 ## Quick start
 
@@ -37,16 +40,16 @@ variables are needed.
 
 ## Scripts
 
-| Script              | What it does                                                                                                                                   |
-| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `npm run dev`       | Vite dev server                                                                                                                                |
-| `npm run build`     | Forbidden-phrase check → typecheck → production build in `dist/`                                                                               |
-| `npm run preview`   | Serve the production build                                                                                                                     |
-| `npm test`          | Vitest unit and component tests                                                                                                                |
-| `npm run test:e2e`  | Playwright smoke and keyboard tests against a build served under `/vantage/` (desktop and 360px). First run: `npx playwright install chromium` |
-| `npm run lint`      | ESLint (including jsx-a11y) and the Prettier check                                                                                             |
-| `npm run typecheck` | `tsc --noEmit` (strict)                                                                                                                        |
-| `npm run format`    | Apply Prettier                                                                                                                                 |
+| Script              | What it does                                                                                                                                                                    |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run dev`       | Vite dev server                                                                                                                                                                 |
+| `npm run build`     | Forbidden-phrase check → typecheck → production build in `dist/`                                                                                                                |
+| `npm run preview`   | Serve the production build                                                                                                                                                      |
+| `npm test`          | Vitest unit and component tests                                                                                                                                                 |
+| `npm run test:e2e`  | Playwright smoke, keyboard and axe accessibility (WCAG 2.1 AA) tests against a build served under `/vantage/` (desktop and 360px). First run: `npx playwright install chromium` |
+| `npm run lint`      | ESLint (including jsx-a11y) and the Prettier check                                                                                                                              |
+| `npm run typecheck` | `tsc --noEmit` (strict)                                                                                                                                                         |
+| `npm run format`    | Apply Prettier                                                                                                                                                                  |
 
 ## Features
 
@@ -66,11 +69,11 @@ variables are needed.
 | F12 | Admin content manager: opportunities, goal types and weightings, CSV outcome import, edit history | R12          |
 
 The full matrix is in [docs/TRACEABILITY.md](docs/TRACEABILITY.md). The data model and scoring formula are in
-[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Tokens, components and usage rules are in [docs/DESIGN.md](docs/DESIGN.md).
 
 ## Demo personas
 
-Each persona is one click on the landing page. It signs you in and prefills profile, goal and constraints.
+Each persona is one click on the landing page ("Try as Marcus", "Try as Priya", "Try as Devon"). It signs you in and prefills profile, goal and constraints.
 
 | Persona    | Shape of need                                                                           | Constraints                    |
 | ---------- | --------------------------------------------------------------------------------------- | ------------------------------ |
