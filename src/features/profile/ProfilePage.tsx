@@ -76,13 +76,13 @@ export default function ProfilePage() {
     <div>
       <OnboardingStepper current="profile" />
       <PageHeader
-        eyebrow="Step 1 · Profile"
+        eyebrow={profile?.onboardingComplete ? undefined : 'Step 1 of 4'}
         title="About you"
         description="Three required fields and a few optional ones. You can change these at any time; saved plans are not affected."
       />
       <form onSubmit={onSubmit} noValidate className="grid gap-6 lg:grid-cols-2">
         <Card as="section" aria-labelledby="req-heading" className="space-y-4">
-          <h2 id="req-heading" className="font-display text-xl font-semibold">
+          <h2 id="req-heading" className="text-xl font-extrabold">
             Studies
           </h2>
           <SelectField
@@ -117,7 +117,7 @@ export default function ProfilePage() {
           />
         </Card>
         <Card as="section" aria-labelledby="bg-heading" className="space-y-4">
-          <h2 id="bg-heading" className="font-display text-xl font-semibold">
+          <h2 id="bg-heading" className="text-xl font-extrabold">
             Background
           </h2>
           <Notice title="How this is used">

@@ -25,7 +25,7 @@ export function SettingsTab({ actor }: { actor: string }) {
   return (
     <div className="space-y-6">
       <Card as="section" aria-labelledby="settings-heading" className="space-y-4">
-        <h3 id="settings-heading" className="font-display text-xl font-semibold">
+        <h3 id="settings-heading" className="text-xl font-extrabold">
           Settings
         </h3>
         {message && (
@@ -64,7 +64,7 @@ export function SettingsTab({ actor }: { actor: string }) {
         </form>
       </Card>
       <Card as="section" aria-labelledby="reset-heading" className="space-y-3">
-        <h3 id="reset-heading" className="font-display text-xl font-semibold">
+        <h3 id="reset-heading" className="text-xl font-extrabold">
           Reset content
         </h3>
         <p className="text-sm text-ink-soft">

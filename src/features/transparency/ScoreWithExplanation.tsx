@@ -20,15 +20,15 @@ export function ScoreWithExplanation({
     <div className="space-y-1.5" data-testid={`score-${attribute.key}`}>
       {showLabel && <p className="text-sm font-semibold text-ink">{attribute.label}</p>}
       <ScoreMeter value={attribute.score} label={attribute.label} />
-      <p className="text-sm text-ink-soft">
+      <p className="text-sm leading-snug text-ink-soft">
         <span className="font-medium text-ink">Driven by:</span> {attribute.summary}
       </p>
       <div className="flex flex-wrap items-center gap-2">
         <DataQualityBadge quality={quality} />
         <span className="text-xs text-ink-muted">Weight {Math.round(attribute.weight * 100)}%</span>
       </div>
-      <details className="text-sm">
-        <summary className="cursor-pointer text-accent-strong underline-offset-2 hover:underline">
+      <details className="disclosure text-sm">
+        <summary className="font-semibold text-accent-strong underline-offset-4 hover:underline">
           Why this rating<span className="sr-only"> for {attribute.label}</span>
         </summary>
         <ul className="mt-2 list-disc space-y-1 pl-5 text-ink-soft">

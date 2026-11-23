@@ -8,7 +8,7 @@ test('Priya: keyboard-only drag-and-drop places an opportunity in a semester', a
 
   // Reach the persona button with the keyboard only.
   const priya = page.getByRole('button', { name: 'Try Vantage as Priya' });
-  for (let i = 0; i < 30 && !(await priya.evaluate((el) => el === document.activeElement)); i++) {
+  for (let i = 0; i < 80 && !(await priya.evaluate((el) => el === document.activeElement)); i++) {
     await page.keyboard.press('Tab');
   }
   await expect(priya).toBeFocused();

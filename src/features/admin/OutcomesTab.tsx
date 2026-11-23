@@ -48,7 +48,7 @@ export function OutcomesTab({ actor }: { actor: string }) {
   return (
     <div className="space-y-6">
       <Card as="section" aria-labelledby="csv-heading" className="space-y-4">
-        <h3 id="csv-heading" className="font-display text-xl font-semibold">
+        <h3 id="csv-heading" className="text-xl font-extrabold">
           Import outcome data (CSV)
         </h3>
         <p className="text-sm text-ink-soft">
@@ -159,7 +159,7 @@ export function OutcomesTab({ actor }: { actor: string }) {
       </Card>
 
       <section aria-labelledby="outcomes-list-heading" className="space-y-2">
-        <h3 id="outcomes-list-heading" className="font-display text-xl font-semibold">
+        <h3 id="outcomes-list-heading" className="text-xl font-extrabold">
           Current outcome records ({outcomes.length})
         </h3>
         <ul className="divide-y divide-line rounded-xl border border-line bg-paper-raised">

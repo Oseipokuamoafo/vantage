@@ -3,10 +3,17 @@ import type { ReactNode } from 'react';
 type Tone = 'info' | 'caution' | 'alert' | 'success';
 
 const tones: Record<Tone, string> = {
-  info: 'border-line bg-paper-sunk text-ink',
-  caution: 'border-caution/30 bg-caution-soft text-ink',
-  alert: 'border-alert/30 bg-alert-soft text-ink',
-  success: 'border-accent/30 bg-accent-soft text-ink',
+  info: 'border-line bg-paper-raised',
+  caution: 'border-caution/30 bg-caution-soft',
+  alert: 'border-alert/30 bg-alert-soft',
+  success: 'border-accent/25 bg-accent-soft',
+};
+
+const bars: Record<Tone, string> = {
+  info: 'bg-line-strong',
+  caution: 'bg-marker',
+  alert: 'bg-alert',
+  success: 'bg-accent',
 };
 
 export function Notice({
@@ -23,10 +30,11 @@ export function Notice({
 }) {
   return (
     <div
-      className={`rounded-lg border px-4 py-3 text-sm ${tones[tone]}`}
+      className={`relative overflow-hidden rounded-xl border py-3 pl-5 pr-4 text-sm text-ink ${tones[tone]}`}
       role={live ? (tone === 'alert' ? 'alert' : 'status') : undefined}
     >
-      {title && <p className="font-semibold">{title}</p>}
+      <span className={`absolute inset-y-0 left-0 w-1.5 ${bars[tone]}`} aria-hidden="true" />
+      {title && <p className="font-bold">{title}</p>}
       <div className={title ? 'mt-1' : ''}>{children}</div>
     </div>
   );

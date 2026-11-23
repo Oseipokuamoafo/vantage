@@ -11,7 +11,7 @@ export function HistoryTab() {
     );
   return (
     <div
-      className="overflow-x-auto rounded-xl border border-line bg-paper-raised"
+      className="relative overflow-x-auto rounded-xl border border-line bg-paper-raised"
       role="region"
       aria-label="Edit history"
       tabIndex={0}

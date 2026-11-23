@@ -54,7 +54,7 @@ function OpportunityForm({
 
   return (
     <Card as="section" aria-labelledby="opp-form-heading" className="space-y-4">
-      <h3 id="opp-form-heading" className="font-display text-xl font-semibold">
+      <h3 id="opp-form-heading" className="text-xl font-extrabold">
         {initial ? `Edit “${initial.title}”` : 'Add an opportunity'}
       </h3>
       <form onSubmit={onSubmit} noValidate className="grid gap-4 md:grid-cols-2">

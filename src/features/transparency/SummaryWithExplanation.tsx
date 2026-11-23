@@ -32,8 +32,8 @@ export function SummaryWithExplanation({
       <div className="flex flex-wrap items-center gap-2">
         <DataQualityBadge quality={result.dataQuality} />
       </div>
-      <details className="text-sm">
-        <summary className="cursor-pointer text-accent-strong underline-offset-2 hover:underline">
+      <details className="disclosure text-sm">
+        <summary className="font-semibold text-accent-strong underline-offset-4 hover:underline">
           How this is calculated
         </summary>
         <div className="mt-2 space-y-1 text-ink-soft">

@@ -57,12 +57,16 @@ function PlanItem({ opp, containers, current, onMove }: ItemProps) {
     <li
       ref={setNodeRef}
       style={style}
-      className={`rounded-lg border border-line bg-paper-raised p-2 ${isDragging ? 'relative z-20 shadow-lg ring-2 ring-accent' : ''}`}
+      className={`rounded-xl border bg-paper-raised p-2 transition-[box-shadow,border-color] duration-150 ${
+        isDragging
+          ? 'relative z-20 rotate-[1.5deg] scale-[1.02] border-accent shadow-lift ring-2 ring-accent'
+          : 'border-line hover:border-line-strong hover:shadow-lift'
+      }`}
     >
       <div className="flex items-start gap-2">
         <button
           type="button"
-          className="flex min-h-[44px] min-w-[44px] shrink-0 cursor-grab touch-none items-center justify-center rounded-md border border-line text-ink-muted hover:bg-paper-sunk"
+          className="flex min-h-[44px] min-w-[44px] shrink-0 cursor-grab touch-none items-center justify-center rounded-lg border border-line text-ink-muted transition-colors hover:border-ink hover:bg-ink hover:text-marker active:cursor-grabbing"
           aria-label={`Drag ${opp.title}`}
           {...listeners}
           {...attributes}
@@ -79,8 +83,8 @@ function PlanItem({ opp, containers, current, onMove }: ItemProps) {
         <div className="min-w-0 flex-1">
           <p className="text-sm font-semibold leading-snug">{opp.title}</p>
           <p className="text-xs text-ink-muted">
-            {TYPE_LABELS[opp.type]} · {opp.timeCommitmentHoursPerWeek} hrs/week ·{' '}
-            {opp.durationWeeks} wk
+            {TYPE_LABELS[opp.type]}, {opp.timeCommitmentHoursPerWeek} h/week for {opp.durationWeeks}{' '}
+            wk
           </p>
           <label className="mt-1 flex min-w-0 items-center gap-2 text-xs">
             <span className="shrink-0 whitespace-nowrap text-ink-soft">Move to</span>
@@ -116,7 +120,7 @@ function Column({
   return (
     <div
       ref={setNodeRef}
-      className={`${className} ${isOver ? 'ring-2 ring-accent ring-offset-2 ring-offset-paper' : ''}`}
+      className={`${className} transition-shadow ${isOver ? 'ring-2 ring-accent ring-offset-4 ring-offset-paper' : ''}`}
     >
       {children}
     </div>
@@ -209,7 +213,11 @@ export default function PlanPage() {
           data-testid={`term-${t.id}`}
         >
           <div className="flex flex-wrap items-baseline justify-between gap-2">
-            <h2 id={`term-${t.id}`} className="font-display text-lg font-semibold">
+            <h2 id={`term-${t.id}`} className="flex items-center gap-2 text-lg font-extrabold">
+              <span
+                className={`h-3.5 w-3.5 rounded-full border-[3px] ${items.length ? 'border-ink bg-marker' : 'border-line-strong bg-paper-raised'}`}
+                aria-hidden="true"
+              />
               {t.label}
             </h2>
             <span
@@ -231,7 +239,7 @@ export default function PlanPage() {
               ))}
             </ul>
           ) : (
-            <p className="rounded-lg border border-dashed border-line-strong p-3 text-center text-sm text-ink-muted">
+            <p className="rounded-xl border-2 border-dashed border-line p-4 text-center text-sm text-ink-muted">
               Drop an opportunity here
             </p>
           )}
@@ -255,7 +263,6 @@ export default function PlanPage() {
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow="Plan"
         title="Semester-by-semester plan"
         description={`${constraints.semestersRemaining} semesters remaining with summers in between. Drag items with a mouse or touch, or focus the handle and use Space and the arrow keys. Every item also has a “Move to” menu.`}
         actions={
@@ -283,7 +290,7 @@ export default function PlanPage() {
         <div className="grid gap-6 lg:grid-cols-[18rem_1fr]">
           <Column id={TRAY} className="rounded-xl lg:sticky lg:top-4 lg:self-start">
             <Card as="section" aria-labelledby="tray-heading" className="space-y-3">
-              <h2 id="tray-heading" className="font-display text-lg font-semibold">
+              <h2 id="tray-heading" className="text-lg font-extrabold">
                 Tray
               </h2>
               <p className="text-sm text-ink-soft">
@@ -357,7 +364,7 @@ export default function PlanPage() {
       </DndContext>
 
       <Card className="space-y-2">
-        <h2 className="font-display text-xl font-semibold">Save this plan</h2>
+        <h2 className="text-xl font-extrabold">Save this plan</h2>
         <SavePlanForm />
       </Card>
     </div>

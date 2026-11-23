@@ -53,7 +53,7 @@ export default function ConstraintsPage() {
     <div>
       <OnboardingStepper current="constraints" />
       <PageHeader
-        eyebrow="Step 3 · Constraints"
+        eyebrow={profile.onboardingComplete ? undefined : 'Step 3 of 4'}
         title="What you have to work with"
         description="These appear as a separate “constraint fit” next to every rating. They never change the base rating, so you can see both."
       />

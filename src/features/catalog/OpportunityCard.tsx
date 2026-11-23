@@ -1,4 +1,4 @@
-import { Badge, Button, Card } from '../../components/ui';
+import { Button } from '../../components/ui';
 import type { GoalType, Opportunity } from '../../data/types';
 import { OutcomesPanel } from '../outcomes';
 import { ATTRIBUTE_ORDER, type ScoreResult } from '../scoring';
@@ -9,6 +9,8 @@ import {
   SummaryWithExplanation,
 } from '../transparency';
 import { formatCost, TYPE_LABELS } from './labels';
+import { TypeMark } from './TypeMark';
+import { TYPE_COLORS } from './typeShapes';
 
 interface Props {
   opp: Opportunity;
@@ -29,20 +31,41 @@ export function OpportunityCard({
 }: Props) {
   const headingId = `opp-${opp.id}`;
   return (
-    <Card as="article" aria-labelledby={headingId} className="space-y-4">
+    <article
+      id={`card-${opp.id}`}
+      aria-labelledby={headingId}
+      className={`group relative scroll-mt-24 space-y-4 overflow-hidden rounded-2xl border bg-paper-raised p-4 pl-6 transition duration-200 hover:shadow-lift sm:p-6 sm:pl-8 ${
+        inCompare ? 'border-accent ring-1 ring-accent' : 'border-line hover:border-line-strong'
+      }`}
+    >
+      <span
+        className="absolute inset-y-0 left-0 w-1.5 transition-[width] duration-200 group-hover:w-2.5"
+        style={{ background: TYPE_COLORS[opp.type] }}
+        aria-hidden="true"
+      />
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-        <div className="space-y-1.5">
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge tone="ink">{TYPE_LABELS[opp.type]}</Badge>
+        <div className="space-y-2">
+          <p className="flex flex-wrap items-center gap-2 text-sm font-semibold text-ink-soft">
+            <span className="inline-flex items-center gap-1.5">
+              <TypeMark type={opp.type} />
+              {TYPE_LABELS[opp.type]}
+            </span>
             <DataQualityBadge quality={opp.dataQuality} />
-          </div>
-          <h2 id={headingId} className="font-display text-xl font-semibold leading-snug">
+          </p>
+          <h2 id={headingId} className="text-xl font-extrabold leading-snug sm:text-2xl">
             {opp.title}
           </h2>
-          <p className="text-sm text-ink-muted">
-            {opp.timeCommitmentHoursPerWeek} hrs/week · {opp.durationWeeks}{' '}
-            {opp.durationWeeks === 1 ? 'week' : 'weeks'} · {formatCost(opp.costUSD)}
-          </p>
+          <ul className="flex flex-wrap gap-1.5 text-sm" aria-label="Time and cost">
+            <li className="tabular rounded-md bg-paper-sunk px-2 py-0.5 font-semibold">
+              {opp.timeCommitmentHoursPerWeek} h/week
+            </li>
+            <li className="tabular rounded-md bg-paper-sunk px-2 py-0.5 font-semibold">
+              {opp.durationWeeks} {opp.durationWeeks === 1 ? 'week' : 'weeks'}
+            </li>
+            <li className="tabular rounded-md bg-paper-sunk px-2 py-0.5 font-semibold">
+              {formatCost(opp.costUSD)}
+            </li>
+          </ul>
         </div>
         <Button
           variant={inCompare ? 'primary' : 'secondary'}
@@ -60,11 +83,14 @@ export function OpportunityCard({
           <span className="sr-only"> for {opp.title}</span>
         </Button>
       </div>
-      <p className="text-ink-soft">{opp.description}</p>
+      <p className="max-w-[70ch] leading-relaxed text-ink-soft">{opp.description}</p>
       <ul className="flex flex-wrap gap-1.5" aria-label="Skills built">
         {opp.skillsBuilt.map((s) => (
-          <li key={s}>
-            <Badge>{s}</Badge>
+          <li
+            key={s}
+            className="rounded-full border border-line px-2.5 py-0.5 text-xs font-medium text-ink-soft"
+          >
+            {s}
           </li>
         ))}
       </ul>
@@ -72,9 +98,9 @@ export function OpportunityCard({
       {result && goal ? (
         <section
           aria-label={`Ratings for ${goal.name}`}
-          className="space-y-4 border-t border-line pt-4"
+          className="space-y-4 border-t border-line pt-5"
         >
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-3">
             {ATTRIBUTE_ORDER.map((k) => (
               <ScoreWithExplanation
                 key={k}
@@ -83,25 +109,25 @@ export function OpportunityCard({
               />
             ))}
           </div>
-          <div className="grid gap-4 rounded-lg bg-paper p-3 md:grid-cols-2">
+          <div className="grid gap-5 rounded-xl bg-paper p-4 md:grid-cols-2">
             <SummaryWithExplanation result={result} goalName={goal.name} />
             <FitPanel result={result} />
           </div>
         </section>
       ) : null}
 
-      <details className="rounded-lg border border-line p-3">
-        <summary className="cursor-pointer text-sm font-medium">
-          More detail: signaling, timing, outcomes, source
+      <details className="disclosure rounded-xl border border-line px-4 py-3 transition-colors hover:border-line-strong">
+        <summary className="text-sm font-semibold">
+          Signaling notes, timing, outcomes and source
         </summary>
         <div className="mt-3 space-y-3 text-sm">
           <p>
-            <span className="font-medium">Signaling notes:</span>{' '}
+            <span className="font-semibold">Signaling notes:</span>{' '}
             <span className="text-ink-soft">{opp.signalingNotes}</span>
           </p>
           {opp.timingWindows.length > 0 && (
             <div>
-              <p className="font-medium">Timing windows</p>
+              <p className="font-semibold">Timing windows</p>
               <ul className="list-disc pl-5 text-ink-soft">
                 {opp.timingWindows.map((w) => (
                   <li key={`${w.label}-${w.season}`}>
@@ -113,13 +139,13 @@ export function OpportunityCard({
           )}
           {goal && (
             <div>
-              <p className="font-medium">Reported outcomes</p>
+              <p className="font-semibold">Reported outcomes</p>
               <OutcomesPanel opportunityId={opp.id} goalTypeId={goal.id} />
             </div>
           )}
           <p className="text-ink-muted">Source: {opp.source}</p>
         </div>
       </details>
-    </Card>
+    </article>
   );
 }

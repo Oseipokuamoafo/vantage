@@ -1,19 +1,19 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Badge,
   Button,
   Card,
   EmptyState,
   Notice,
   PageHeader,
   buttonClass,
+  inputClass,
 } from '../../components/ui';
 import { useOpportunities } from '../../data/content';
 import { getPlan } from '../../data/plans';
 import { MAX_COMPARE, MIN_COMPARE, toggleCompare, updateWorkspace } from '../../data/workspace';
 import { useStudent } from '../../hooks/useStudent';
-import { formatCost, TYPE_LABELS } from '../catalog';
+import { formatCost, TYPE_COLORS, TYPE_LABELS, TypeMark } from '../catalog';
 import { OutcomesPanel } from '../outcomes';
 import { ChangesSinceSaved, SavePlanForm } from '../saved';
 import { ATTRIBUTE_LABELS, ATTRIBUTE_ORDER, scoreAll } from '../scoring';
@@ -70,13 +70,12 @@ export default function ComparePage() {
     setPick('');
   }
 
-  const cell = 'border-b border-line p-3 align-top';
-  const rowHeader = `${cell} sticky left-0 z-10 w-28 min-w-[7rem] bg-paper-sunk text-left text-sm font-semibold sm:w-40`;
+  const cell = 'border-b border-line p-3 align-top transition-colors group-hover:bg-paper sm:p-4';
+  const rowHeader = `${cell} sticky left-0 z-10 w-28 min-w-[7rem] bg-paper-sunk text-left text-sm font-bold transition-colors group-hover:bg-marker-soft sm:w-40`;
 
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow="Compare"
         title="Side-by-side comparison"
         description={
           <>
@@ -99,7 +98,7 @@ export default function ComparePage() {
               value={pick}
               onChange={(e) => setPick(e.target.value)}
               disabled={full}
-              className="block min-h-[44px] w-full rounded-lg border border-line-strong bg-paper-raised px-3 py-2"
+              className={inputClass}
             >
               <option value="">{full ? 'Comparison is full' : 'Choose from the catalog…'}</option>
               {available.map((o) => (
@@ -150,7 +149,7 @@ export default function ComparePage() {
             role="region"
             aria-label="Comparison table, scrolls horizontally"
             tabIndex={0}
-            className="snap-x snap-mandatory scroll-pl-28 overflow-x-auto rounded-xl sm:scroll-pl-40 border border-line bg-paper-raised"
+            className="relative snap-x snap-mandatory scroll-pl-28 overflow-x-auto rounded-xl sm:scroll-pl-40 border border-line bg-paper-raised"
           >
             <table className="w-full border-collapse text-left">
               <caption className="sr-only">
@@ -158,18 +157,22 @@ export default function ComparePage() {
               </caption>
               <thead>
                 <tr>
-                  <th scope="col" className={`${rowHeader} align-bottom`}>
+                  <th scope="col" className={`${rowHeader} align-bottom group-hover:bg-paper-sunk`}>
                     Attribute
                   </th>
                   {selected.map((o) => (
                     <th
                       key={o.id}
                       scope="col"
-                      className={`${cell} min-w-[72vw] snap-start bg-paper-raised font-normal sm:min-w-[16rem]`}
+                      className={`${cell} min-w-[72vw] snap-start border-t-4 bg-paper-raised font-normal sm:min-w-[16rem]`}
+                      style={{ borderTopColor: TYPE_COLORS[o.type] }}
                     >
                       <div className="space-y-2">
-                        <Badge tone="ink">{TYPE_LABELS[o.type]}</Badge>
-                        <p className="font-display text-lg font-semibold leading-snug">{o.title}</p>
+                        <p className="flex items-center gap-1.5 text-sm font-semibold text-ink-soft">
+                          <TypeMark type={o.type} />
+                          {TYPE_LABELS[o.type]}
+                        </p>
+                        <p className="text-lg font-extrabold leading-snug">{o.title}</p>
                         <Button
                           size="sm"
                           variant="ghost"
@@ -184,7 +187,7 @@ export default function ComparePage() {
               </thead>
               <tbody>
                 {ATTRIBUTE_ORDER.map((k) => (
-                  <tr key={k}>
+                  <tr key={k} className="group">
                     <th scope="row" className={rowHeader}>
                       {ATTRIBUTE_LABELS[k]}
                     </th>
@@ -199,7 +202,7 @@ export default function ComparePage() {
                     ))}
                   </tr>
                 ))}
-                <tr>
+                <tr className="group">
                   <th scope="row" className={rowHeader}>
                     Weighted summary
                   </th>
@@ -209,7 +212,7 @@ export default function ComparePage() {
                     </td>
                   ))}
                 </tr>
-                <tr>
+                <tr className="group">
                   <th scope="row" className={rowHeader}>
                     Constraint fit
                   </th>
@@ -219,7 +222,7 @@ export default function ComparePage() {
                     </td>
                   ))}
                 </tr>
-                <tr>
+                <tr className="group">
                   <th scope="row" className={rowHeader}>
                     Reported outcomes
                   </th>
@@ -229,7 +232,7 @@ export default function ComparePage() {
                     </td>
                   ))}
                 </tr>
-                <tr>
+                <tr className="group">
                   <th scope="row" className={rowHeader}>
                     Time and cost
                   </th>
@@ -240,7 +243,7 @@ export default function ComparePage() {
                     </td>
                   ))}
                 </tr>
-                <tr>
+                <tr className="group">
                   <th scope="row" className={rowHeader}>
                     Timing windows
                   </th>
@@ -257,7 +260,7 @@ export default function ComparePage() {
                     </td>
                   ))}
                 </tr>
-                <tr>
+                <tr className="group">
                   <th scope="row" className={`${rowHeader} border-b-0`}>
                     Source
                   </th>
@@ -272,7 +275,7 @@ export default function ComparePage() {
           </div>
           <DataQualityLegend />
           <Card className="space-y-2">
-            <h2 className="font-display text-xl font-semibold">Save this comparison</h2>
+            <h2 className="text-xl font-extrabold">Save this comparison</h2>
             <p className="text-sm text-ink-soft">
               Saves your goal, constraints, these {selected.length} opportunities and your semester
               plan, so you can reopen them later.

@@ -35,7 +35,7 @@ export function OutcomesPanel({
             {r.metric.charAt(0).toLowerCase() + r.metric.slice(1)}
           </p>
           <p className="text-ink-muted">
-            n = {r.sampleSize} · {r.cohort}
+            n = {r.sampleSize}, {r.cohort}
           </p>
           <p className="flex flex-wrap items-center gap-2 text-ink-muted">
             <DataQualityBadge quality={r.dataQuality} />

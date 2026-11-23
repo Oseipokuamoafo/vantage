@@ -48,7 +48,7 @@ export default function GoalPage() {
     <div>
       <OnboardingStepper current="goal" />
       <PageHeader
-        eyebrow="Step 2 · Goal"
+        eyebrow={profile.onboardingComplete ? undefined : 'Step 2 of 4'}
         title="What are you working toward?"
         description="Your goal sets how much each of the three measures counts. Weightings for each goal are shown so you can see exactly how it changes things."
       />
@@ -61,9 +61,9 @@ export default function GoalPage() {
             return (
               <div
                 key={g.id}
-                className={`rounded-xl border bg-paper-raised p-4 ${
+                className={`rounded-2xl border bg-paper-raised p-5 transition duration-200 ${
                   selected === g.id ? 'border-accent ring-2 ring-accent/30' : 'border-line'
-                } ${selectable ? '' : 'opacity-70'}`}
+                } ${selectable ? 'hover:border-ink hover:shadow-lift' : 'opacity-70'}`}
               >
                 <div className="flex items-start gap-3">
                   <input
@@ -83,7 +83,7 @@ export default function GoalPage() {
                   <div className="flex-1 space-y-2">
                     <label
                       htmlFor={id}
-                      className="flex flex-wrap items-center gap-2 font-display text-lg font-semibold"
+                      className="flex cursor-pointer flex-wrap items-center gap-2 text-xl font-extrabold"
                     >
                       {g.name}
                       {g.status === 'coming_soon' && <Badge tone="caution">Coming soon</Badge>}

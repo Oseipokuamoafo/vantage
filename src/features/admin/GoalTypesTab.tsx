@@ -156,7 +156,7 @@ export function GoalTypesTab({ actor }: { actor: string }) {
             </SelectField>
           </div>
         </div>
-        <h3 id="goal-form-heading" className="font-display text-xl font-semibold">
+        <h3 id="goal-form-heading" className="text-xl font-extrabold">
           {current ? `Edit “${current.name}”` : 'New goal type'}
         </h3>
         {message && (
@@ -312,7 +312,7 @@ export function GoalTypesTab({ actor }: { actor: string }) {
         </form>
       </Card>
       <aside aria-label="Weighting preview" className="space-y-3">
-        <h3 className="font-display text-lg font-semibold">Live preview</h3>
+        <h3 className="text-lg font-extrabold">Live preview</h3>
         <p className="text-sm text-ink-soft">
           How the unsaved weightings would rate a few catalog entries.
         </p>

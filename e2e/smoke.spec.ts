@@ -52,6 +52,7 @@ test('Marcus: onboard, set goal and constraints, compare 3, save, reload, plan p
   // Every rating carries an explanation and a data-quality label.
   await expect(table.getByText('Driven by:')).toHaveCount(12); // 3 attributes + summary, × 3 columns
   await expect(table.getByText(/Team estimate|Limited data|Sourced/).first()).toBeVisible();
+  await expectNoHorizontalScroll(page);
 
   // Save the plan.
   await page.getByLabel('Save as a new plan').fill('Marcus smoke plan');

@@ -2,3 +2,6 @@
 // Satisfies: R4 (opportunity catalog), R12 (team-editable content).
 export { filterOpportunities, EMPTY_FILTERS, type CatalogFilters } from './filter';
 export { TYPE_LABELS, formatCost } from './labels';
+export { TypeMark } from './TypeMark';
+export { TYPE_COLORS } from './typeShapes';
+export { TradeoffMap } from './TradeoffMap';

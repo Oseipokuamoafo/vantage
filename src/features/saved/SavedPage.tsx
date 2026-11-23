@@ -100,12 +100,12 @@ function PlanCard({ plan }: { plan: SavedPlan }) {
         </form>
       ) : (
         <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h2 id={headingId} className="font-display text-xl font-semibold">
+          <h2 id={headingId} className="text-xl font-extrabold">
             {plan.name}
           </h2>
           <p className="text-xs text-ink-muted">
             Saved {fmtDate(plan.createdAt)}
-            {plan.updatedAt !== plan.createdAt && ` · updated ${fmtDate(plan.updatedAt)}`}
+            {plan.updatedAt !== plan.createdAt && `, updated ${fmtDate(plan.updatedAt)}`}
           </p>
         </div>
       )}
@@ -117,7 +117,7 @@ function PlanCard({ plan }: { plan: SavedPlan }) {
         <div>
           <dt className="text-ink-muted">Constraints when saved</dt>
           <dd>
-            {plan.constraints.weeklyHours} hrs/week · ${plan.constraints.budgetUSD} ·{' '}
+            {plan.constraints.weeklyHours} h/week, ${plan.constraints.budgetUSD},{' '}
             {plan.constraints.semestersRemaining} semesters
           </dd>
         </div>
@@ -190,7 +190,6 @@ export default function SavedPage() {
   return (
     <div>
       <PageHeader
-        eyebrow="Saved"
         title="Saved plans"
         description="Each plan keeps its goal, constraints, compared opportunities and semester layout. Plans stay here when you log out or edit your profile."
       />

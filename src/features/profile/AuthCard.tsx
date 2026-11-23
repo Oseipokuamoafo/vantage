@@ -14,7 +14,7 @@ export function AuthCard({
     <div className="mx-auto max-w-md">
       <Card className="space-y-5">
         <div className="space-y-1">
-          <h1 className="font-display text-3xl font-semibold">{title}</h1>
+          <h1 className="text-3xl font-extrabold">{title}</h1>
           {intro && <div className="text-sm text-ink-soft">{intro}</div>}
         </div>
         {children}

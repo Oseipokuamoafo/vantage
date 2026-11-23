@@ -15,11 +15,12 @@ const NAV = [
   { to: '/saved', label: 'Saved' },
 ];
 
+// The active item carries a yellow trail marker; hovering slides one in.
 function navClass({ isActive }: { isActive: boolean }) {
-  return `inline-flex min-h-[44px] items-center whitespace-nowrap rounded-lg px-3 text-sm font-medium ${
+  return `relative inline-flex min-h-[44px] items-center whitespace-nowrap px-3 text-sm font-semibold transition-colors after:absolute after:inset-x-3 after:bottom-0 after:h-[3px] after:rounded-full after:bg-marker after:transition-transform after:duration-200 ${
     isActive
-      ? 'bg-accent-soft text-accent-strong'
-      : 'text-ink-soft hover:bg-paper-sunk hover:text-ink'
+      ? 'text-white after:scale-x-100'
+      : 'text-white/70 after:scale-x-0 hover:text-white hover:after:scale-x-50'
   }`;
 }
 
@@ -41,34 +42,38 @@ export function AppShell() {
         Skip to main content
       </a>
       <PrototypeBanner />
-      <header className="border-b border-line bg-paper-raised">
+      <header className="topo bg-ink text-white">
         <div className="mx-auto flex max-w-content items-center justify-between gap-3 px-4 py-3">
-          <Link to="/" className="flex items-center gap-2 rounded-lg" aria-label="Vantage home">
-            <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true">
-              <rect width="32" height="32" rx="7" fill="#16202e" />
-              <path
-                d="M8 9l8 15 8-15"
-                fill="none"
-                stroke="#7fd1c7"
-                strokeWidth="3.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+          <Link
+            to="/"
+            className="group flex items-center gap-2.5 rounded-lg"
+            aria-label="Vantage home"
+          >
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 32 32"
+              aria-hidden="true"
+              className="transition-transform duration-300 group-hover:-translate-y-0.5"
+            >
+              <path d="M2 27 L12 11 L17 18 L21 13 L30 27 Z" fill="#f2c230" />
+              <path d="M12 11 L14.6 15 L12 14.2 L9.6 15.2 Z" fill="#ffffff" />
+              <circle cx="24" cy="7" r="2.6" fill="#ffffff" fillOpacity="0.85" />
             </svg>
-            <span className="font-display text-xl font-semibold tracking-tight">Vantage</span>
+            <span className="text-xl font-extrabold tracking-tight">Vantage</span>
           </Link>
           <div className="flex items-center gap-2 text-sm">
             {user ? (
               <>
                 <span
-                  className="hidden max-w-[16rem] truncate text-ink-muted sm:inline"
+                  className="hidden max-w-[16rem] truncate text-white/70 sm:inline"
                   title={user.email}
                 >
                   {user.email}
                 </span>
                 <button
                   type="button"
-                  className={buttonClass('secondary', 'sm')}
+                  className={buttonClass('inverse', 'sm')}
                   onClick={() => {
                     logOut();
                     navigate('/');
@@ -79,7 +84,7 @@ export function AppShell() {
               </>
             ) : (
               <>
-                <Link to="/login" className={buttonClass('ghost', 'sm')}>
+                <Link to="/login" className={buttonClass('inverse', 'sm')}>
                   Log in
                 </Link>
                 <Link to="/signup" className={buttonClass('primary', 'sm')}>
@@ -90,8 +95,8 @@ export function AppShell() {
           </div>
         </div>
         {user && (
-          <nav aria-label="Main" className="mx-auto max-w-content px-2 pb-2">
-            <ul className="flex gap-1 overflow-x-auto px-2">
+          <nav aria-label="Main" className="mx-auto max-w-content px-2">
+            <ul className="flex gap-1 overflow-x-auto px-1">
               {items.map((item) => (
                 <li key={item.to}>
                   <NavLink to={item.to} className={navClass}>
@@ -112,7 +117,7 @@ export function AppShell() {
           <Outlet />
         </Suspense>
       </main>
-      <footer className="border-t border-line px-4 py-6 text-center text-xs text-ink-muted">
+      <footer className="border-t border-line px-4 py-8 text-center text-sm text-ink-muted">
         Vantage shows trade-offs to support your own decision. It does not make the decision for
         you.
       </footer>

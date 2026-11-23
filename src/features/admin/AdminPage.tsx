@@ -38,7 +38,6 @@ export default function AdminPage() {
   return (
     <div>
       <PageHeader
-        eyebrow="Admin"
         title="Content manager"
         description="Edit the catalog, goal types and weightings, and outcome data. Every change is logged and takes effect immediately for students in this browser."
       />
