@@ -1,8 +1,10 @@
 import { Suspense } from 'react';
-import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { logOut } from '../../data/auth';
 import { useStudent } from '../../hooks/useStudent';
 import { PrototypeBanner } from './PrototypeBanner';
+import { TopoBackground } from './TopoBackground';
+import { useSpotlightTracking } from '../../hooks/usePointerEffects';
 import { buttonClass } from '../ui';
 
 const NAV = [
@@ -27,10 +29,13 @@ function navClass({ isActive }: { isActive: boolean }) {
 export function AppShell() {
   const { user } = useStudent();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  useSpotlightTracking();
   const items = user?.role === 'admin' ? [...NAV, { to: '/admin', label: 'Admin' }] : NAV;
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="relative flex min-h-screen flex-col">
+      <TopoBackground strength={pathname === '/' ? 1 : 0.6} />
       <a
         href="#main"
         onClick={(e) => {
@@ -41,8 +46,10 @@ export function AppShell() {
       >
         Skip to main content
       </a>
-      <PrototypeBanner />
-      <header className="topo bg-ink text-white">
+      <div className="relative z-10">
+        <PrototypeBanner />
+      </div>
+      <header className="topo relative z-10 bg-ink text-white">
         <div className="mx-auto flex max-w-content items-center justify-between gap-3 px-4 py-3">
           <Link
             to="/"
@@ -111,13 +118,13 @@ export function AppShell() {
       <main
         id="main"
         tabIndex={-1}
-        className="mx-auto w-full max-w-content flex-1 px-4 py-6 outline-none sm:py-10"
+        className="relative z-10 mx-auto w-full max-w-content flex-1 px-4 py-8 outline-none sm:py-12"
       >
         <Suspense fallback={<p className="text-ink-muted">Loading…</p>}>
           <Outlet />
         </Suspense>
       </main>
-      <footer className="border-t border-line px-4 py-8 text-center text-sm text-ink-muted">
+      <footer className="relative z-10 border-t border-line bg-paper/80 px-4 py-8 text-center text-sm text-ink-muted backdrop-blur-sm">
         Vantage shows trade-offs to support your own decision. It does not make the decision for
         you.
       </footer>

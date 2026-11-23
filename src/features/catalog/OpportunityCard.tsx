@@ -34,7 +34,7 @@ export function OpportunityCard({
     <article
       id={`card-${opp.id}`}
       aria-labelledby={headingId}
-      className={`group relative scroll-mt-24 space-y-4 overflow-hidden rounded-2xl border bg-paper-raised p-4 pl-6 transition duration-200 hover:shadow-lift sm:p-6 sm:pl-8 ${
+      className={`spotlight group relative scroll-mt-24 space-y-4 overflow-hidden rounded-2xl border bg-paper-raised p-4 pl-6 transition duration-200 hover:shadow-lift sm:p-6 sm:pl-8 ${
         inCompare ? 'border-accent ring-1 ring-accent' : 'border-line hover:border-line-strong'
       }`}
     >

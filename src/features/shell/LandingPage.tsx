@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Notice, buttonClass } from '../../components/ui';
+import { Notice, Reveal, buttonClass } from '../../components/ui';
 import { useOpportunities } from '../../data/content';
+import { useTilt } from '../../hooks/usePointerEffects';
 import { useStudent } from '../../hooks/useStudent';
+import type { Persona } from '../../data/types';
 import { TradeoffMap } from '../catalog';
 import { PERSONAS, startPersona } from './personas';
 
@@ -30,6 +32,75 @@ const STEPS = [
     'Filter the catalog, compare 2–4 options, then lay them out by semester.',
   ],
 ];
+
+function PersonaTile({
+  persona: p,
+  busy,
+  onStart,
+}: {
+  persona: Persona;
+  busy: string | null;
+  onStart: () => void;
+}) {
+  const tilt = useTilt<HTMLButtonElement>();
+  return (
+    <button
+      ref={tilt.ref}
+      type="button"
+      disabled={busy !== null}
+      onClick={onStart}
+      onPointerMove={tilt.onPointerMove}
+      onPointerLeave={tilt.onPointerLeave}
+      aria-label={`Try Vantage as ${p.name}`}
+      aria-describedby={`persona-${p.id}`}
+      className="spotlight tilt group flex h-full w-full flex-col gap-4 rounded-2xl border border-line bg-paper-raised p-5 text-left hover:border-accent/40 hover:shadow-lift disabled:opacity-60"
+    >
+      <span className="tilt-glare" aria-hidden="true" />
+      <span className="flex items-center gap-3">
+        <span
+          className="flex h-11 w-11 items-center justify-center rounded-full bg-ink text-lg font-black text-marker transition-transform duration-300 group-hover:rotate-[-8deg] group-hover:scale-110"
+          aria-hidden="true"
+        >
+          {p.name[0]}
+        </span>
+        <span className="text-xl font-extrabold">{p.name}</span>
+      </span>
+      <span id={`persona-${p.id}`} className="text-ink-soft">
+        {p.summary}
+      </span>
+      <span className="mt-auto flex flex-wrap gap-1.5 text-sm">
+        <span className="rounded-md bg-paper-sunk px-2 py-0.5 font-semibold">
+          {p.constraints.weeklyHours} h/week
+        </span>
+        <span className="rounded-md bg-paper-sunk px-2 py-0.5 font-semibold">
+          ${p.constraints.budgetUSD} budget
+        </span>
+        <span className="rounded-md bg-paper-sunk px-2 py-0.5 font-semibold">
+          {p.constraints.semestersRemaining} semesters
+        </span>
+      </span>
+      <span className="inline-flex items-center gap-1.5 font-bold text-accent-strong">
+        {busy === p.id ? 'Starting…' : `Try as ${p.name}`}
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          aria-hidden="true"
+          className="transition-transform duration-200 group-hover:translate-x-1"
+        >
+          <path
+            d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </span>
+    </button>
+  );
+}
 
 export function LandingPage() {
   const { user, profile, goalTypes } = useStudent();
@@ -96,7 +167,7 @@ export function LandingPage() {
           </div>
         </div>
         {heroGoal && (
-          <div className="rounded-hero border border-line bg-paper-raised p-4 shadow-lift sm:p-6">
+          <div className="spotlight rounded-hero border border-line bg-paper-raised/95 p-4 shadow-lift backdrop-blur-sm sm:p-6">
             <div className="mb-3">
               <h2 className="text-lg font-bold">The {heroGoal.name.toLowerCase()} terrain</h2>
               <p className="text-sm text-ink-soft">
@@ -114,11 +185,17 @@ export function LandingPage() {
           Every option, on the same three measures
         </h2>
         <dl className="grid gap-6 sm:grid-cols-3">
-          {MEASURES.map((m) => (
-            <div key={m.name} className="border-t-[3px] border-ink pt-3">
-              <dt className="text-lg font-bold">{m.name}</dt>
-              <dd className="mt-1 text-ink-soft">{m.body}</dd>
-            </div>
+          {MEASURES.map((m, i) => (
+            <Reveal key={m.name} delay={i * 90}>
+              <div className="group border-t-[3px] border-ink pt-3">
+                <dt className="text-lg font-bold">
+                  <span className="bg-[linear-gradient(#f2c230,#f2c230)] bg-[length:0%_35%] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 group-hover:bg-[length:100%_35%]">
+                    {m.name}
+                  </span>
+                </dt>
+                <dd className="mt-1 text-ink-soft">{m.body}</dd>
+              </div>
+            </Reveal>
           ))}
         </dl>
         <p className="text-sm text-ink-muted">
@@ -141,43 +218,11 @@ export function LandingPage() {
           </Notice>
         )}
         <ul className="grid gap-4 md:grid-cols-3">
-          {PERSONAS.map((p) => (
+          {PERSONAS.map((p, i) => (
             <li key={p.id}>
-              <button
-                type="button"
-                disabled={busy !== null}
-                onClick={() => void tryPersona(p.id)}
-                aria-label={`Try Vantage as ${p.name}`}
-                aria-describedby={`persona-${p.id}`}
-                className="group flex h-full w-full flex-col gap-4 rounded-2xl border border-line bg-paper-raised p-5 text-left transition duration-200 hover:-translate-y-1 hover:border-accent hover:shadow-lift disabled:opacity-60 disabled:hover:translate-y-0"
-              >
-                <span className="flex items-center gap-3">
-                  <span
-                    className="flex h-11 w-11 items-center justify-center rounded-full bg-ink text-lg font-black text-marker transition-transform duration-300 group-hover:rotate-[-8deg]"
-                    aria-hidden="true"
-                  >
-                    {p.name[0]}
-                  </span>
-                  <span className="text-xl font-extrabold">{p.name}</span>
-                </span>
-                <span id={`persona-${p.id}`} className="text-ink-soft">
-                  {p.summary}
-                </span>
-                <span className="mt-auto flex flex-wrap gap-1.5 text-sm">
-                  <span className="rounded-md bg-paper-sunk px-2 py-0.5 font-semibold">
-                    {p.constraints.weeklyHours} h/week
-                  </span>
-                  <span className="rounded-md bg-paper-sunk px-2 py-0.5 font-semibold">
-                    ${p.constraints.budgetUSD} budget
-                  </span>
-                  <span className="rounded-md bg-paper-sunk px-2 py-0.5 font-semibold">
-                    {p.constraints.semestersRemaining} semesters
-                  </span>
-                </span>
-                <span className="font-bold text-accent-strong underline decoration-transparent decoration-2 underline-offset-4 transition-colors group-hover:decoration-current">
-                  {busy === p.id ? 'Starting…' : `Try as ${p.name}`}
-                </span>
-              </button>
+              <Reveal delay={i * 90} className="h-full">
+                <PersonaTile persona={p} busy={busy} onStart={() => void tryPersona(p.id)} />
+              </Reveal>
             </li>
           ))}
         </ul>
@@ -193,8 +238,8 @@ export function LandingPage() {
             aria-hidden="true"
           />
           {STEPS.map(([title, body], i) => (
-            <li key={title} className="relative flex gap-4 md:flex-col md:gap-3">
-              <span className="relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-[3px] border-paper bg-ink text-sm font-black text-marker ring-[3px] ring-line">
+            <li key={title} className="group relative flex gap-4 md:flex-col md:gap-3">
+              <span className="relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-[3px] border-paper bg-ink text-sm font-black text-marker ring-[3px] ring-line transition duration-300 group-hover:scale-125 group-hover:bg-accent group-hover:text-white group-hover:ring-accent/30">
                 {i + 1}
               </span>
               <span>

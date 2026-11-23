@@ -61,7 +61,7 @@ export default function GoalPage() {
             return (
               <div
                 key={g.id}
-                className={`rounded-2xl border bg-paper-raised p-5 transition duration-200 ${
+                className={`spotlight rounded-2xl border bg-paper-raised p-5 transition duration-200 ${
                   selected === g.id ? 'border-accent ring-2 ring-accent/30' : 'border-line'
                 } ${selectable ? 'hover:border-ink hover:shadow-lift' : 'opacity-70'}`}
               >

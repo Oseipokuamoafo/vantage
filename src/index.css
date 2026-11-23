@@ -60,7 +60,123 @@
   }
 }
 
+@layer components {
+  /* Cursor spotlight: a glowing border and a soft wash that follow the pointer (see useSpotlightTracking). */
+  .spotlight {
+    position: relative;
+    isolation: isolate;
+  }
+  .spotlight::before,
+  .spotlight::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  .spotlight::before {
+    inset: 0;
+    padding: 1.5px;
+    background: radial-gradient(
+      260px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(31, 79, 216, 0.85),
+      rgba(242, 194, 48, 0.55) 35%,
+      transparent 70%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    z-index: 2;
+  }
+  .spotlight::after {
+    inset: 0;
+    background: radial-gradient(
+      420px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(31, 79, 216, 0.07),
+      transparent 45%
+    );
+    z-index: -1;
+  }
+  .spotlight:hover::before,
+  .spotlight:hover::after,
+  .spotlight:focus-within::before {
+    opacity: 1;
+  }
+
+  /* Tilt surfaces get a moving glare (see useTilt). */
+  .tilt {
+    transform-style: preserve-3d;
+    transition:
+      transform 0.25s ease-out,
+      box-shadow 0.25s ease-out,
+      border-color 0.25s ease-out;
+    will-change: transform;
+  }
+  .tilt-glare {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background: radial-gradient(
+      circle at var(--gx, 50%) var(--gy, 50%),
+      rgba(31, 79, 216, 0.09),
+      rgba(31, 79, 216, 0) 55%
+    );
+  }
+  .tilt:hover .tilt-glare {
+    opacity: 1;
+  }
+
+  /* Scroll reveal (see <Reveal>). */
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+  }
+  .reveal.is-shown {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* A light sweep across primary buttons on hover. */
+  .shine {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .shine::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    transform: translateX(-120%);
+    background: linear-gradient(
+      110deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.35) 50%,
+      transparent 70%
+    );
+    transition: transform 0.7s ease;
+  }
+  .shine:hover::after {
+    transform: translateX(120%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
   *,
   *::before,
   *::after {

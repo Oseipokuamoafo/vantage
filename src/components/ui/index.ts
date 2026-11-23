@@ -7,3 +7,4 @@ export { PageHeader } from './PageHeader';
 export { EmptyState } from './EmptyState';
 export { ScoreMeter } from './ScoreMeter';
 export { buttonClass, inputClass } from './styles';
+export { Reveal } from './Reveal';
